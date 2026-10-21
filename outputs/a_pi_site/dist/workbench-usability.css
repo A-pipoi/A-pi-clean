@@ -1,0 +1,1304 @@
+/* Operate-mode corrections: readable surfaces and stable, progressively disclosed work. */
+html[data-theme] .app-shell {
+  color: var(--text);
+}
+.sidebar-handle { display: none; }
+@media (min-width: 721px) {
+  .app-shell .sidebar-dock {
+    position: fixed;
+    inset-block: 12px;
+    inset-inline-start: 0;
+    width: 112px;
+    z-index: 220;
+    transform: translateX(calc(-100% + 24px));
+    pointer-events: none;
+  }
+  .app-shell .sidebar-dock[data-open="true"] { transform: translateX(0); }
+  .app-shell .sidebar-dock .sidebar {
+    position: absolute;
+    inset-block: 0;
+    inset-inline-start: 0;
+    height: 100%;
+    width: 88px;
+    border-radius: 0 var(--radius) var(--radius) 0;
+    pointer-events: auto;
+  }
+  .app-shell .sidebar-dock .sidebar[inert] { pointer-events: none; }
+  .app-shell .sidebar-dock + .main-content {
+    margin-inline-start: 32px;
+    width: calc(100% - 32px);
+  }
+  .app-shell .sidebar-handle {
+    display: grid;
+    place-items: center;
+    position: absolute;
+    inset-inline-end: 0;
+    top: calc(50% - 36px);
+    width: 24px;
+    height: 72px;
+    padding: 0;
+    border-radius: 0 12px 12px 0;
+    color: var(--sidebar-text);
+    background: var(--sidebar-bg);
+    pointer-events: auto;
+  }
+  .sidebar-handle svg {
+    width: 18px; height: 18px; fill: none; stroke: currentColor;
+    stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round;
+  }
+  .sidebar-dock[data-open="true"] .sidebar-handle svg { transform: rotate(180deg); }
+  .sidebar-handle:focus-visible { outline-offset: -4px; }
+  @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+    .app-shell .sidebar-dock { transition: transform 220ms var(--desk-ease-out); }
+  }
+  .app-shell .sidebar-dock[data-instant="true"] { transition: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .app-shell .sidebar-dock { transition: none; }
+  }
+}
+@media (max-width: 720px) {
+  .sidebar-dock { display: contents; }
+}
+@media (min-width: 721px) {
+  .app-shell .sidebar {
+    position: fixed;
+    inset-block: 12px;
+    inset-inline-start: 12px;
+    height: calc(100dvh - 24px);
+    min-height: 0;
+    margin: 0;
+    z-index: 40;
+    overflow-y: auto;
+    overflow-x: hidden;
+    overscroll-behavior: contain;
+  }
+  .app-shell .main-content {
+    margin-inline-start: 100px;
+    width: calc(100% - 100px);
+    flex: 1 1 0;
+  }
+}
+@media (max-width: 720px) {
+  .app-shell .sidebar { position: sticky; top: 0; z-index: 40; }
+  .app-shell .main-content { margin-inline-start: 0; width: 100%; }
+}
+html[data-theme] :is(.notification-center,.utility-dialog,.account-security,.archive-dialog) {
+  background: var(--panel);
+  color: var(--text);
+}
+html[data-theme] :is(.notification-copy strong,.notification-empty strong,.utility-row strong,
+  .factor-mining-list strong,.factor-mining-guardrails dd,.governance-grid strong,
+  .result-table strong,.config-group legend,.factor-expression-area label,
+  .account-security h3,.account-security label,.account-security select) {
+  color: var(--text);
+}
+html[data-theme] :is(.notification-copy > span,.notification-copy small,.notification-arrow,
+  .notification-detail small,.utility-row > span,.panel-subtitle,.factor-expression-help,
+  .factor-mining-guardrails p,.factor-mining-guardrails dt,.config-note,.universe-meta,
+  .result-table > div > span,.governance-grid > div > span,.datum-note,
+  .chart-y-axis-title,.chart-x-axis-title,.axis-labels,.factor-mining-heading p) {
+  color: var(--muted);
+}
+html[data-theme] .app-shell :is(.side-account-hero > span:first-child,
+  .side-stat-grid span,.side-progress-label > span,.run-row b,.run-footer > span,
+  .risk-meter-row span,.risk-meter-row small,.side-live) { color: var(--muted); }
+html[data-theme] .app-shell .paper-side-card .datum-note { color: var(--account-muted); }
+html[data-theme] :is(input,textarea)::placeholder { color: var(--muted); opacity: 1; }
+html[data-theme] .notification-item:is(.unread,:hover) { background: var(--panel2); }
+html[data-theme] :is(.notification-read-all,.notification-refresh) { color: var(--purple); }
+html[data-theme] .notification-marker.info { background: var(--info-surface); color: var(--purple); }
+html[data-theme] .notification-marker:is(.error,.warning) { background: var(--warning-surface); color: var(--warning-text); }
+html[data-theme] .notification-marker.success { background: var(--panel2); color: var(--lime); }
+.notification-row { display: flex; gap: 8px; align-items: stretch; min-width: 0; }
+.app-shell .notification-row .notification-item { flex: 1 1 0; min-width: 0; width: auto; }
+.notification-delete {
+  flex: 0 0 44px; min-height: 44px; border-radius: 8px;
+  background: var(--panel2); color: var(--red); align-self: center;
+}
+.notification-arrow { opacity: 1; }
+.notification-copy :is(strong,span) {
+  white-space: normal; overflow-wrap: anywhere; text-overflow: clip;
+}
+.notification-detail { display: grid; gap: 12px; min-width: 0; padding: 12px; }
+.notification-detail :is(h3,p) { margin: 0; overflow-wrap: anywhere; white-space: pre-wrap; }
+.notification-detail p { max-height: 240px; overflow-y: auto; overscroll-behavior: contain; }
+.app-shell .notification-center { width: min(480px, calc(100vw - 32px)); }
+.app-shell .workbench-disclosure {
+  margin-block: 20px; min-width: 0; grid-column: 1 / -1;
+  border-radius: 12px; background: var(--panel); color: var(--text);
+}
+.workbench-disclosure > summary {
+  cursor: pointer; padding: 16px 20px; font-weight: 600; line-height: 1.5;
+  overflow-wrap: anywhere; color: var(--text);
+}
+.workbench-disclosure[open] > summary { border-bottom: 1px solid var(--line); }
+.workbench-disclosure > :not(summary) { margin: 0; padding: 20px; }
+.app-shell .workbench-disclosure > :is(.panel,.result-table,.factor-mining-config) {
+  box-shadow: none; border: 0; border-radius: 0; background: transparent;
+}
+.app-shell .factor-mining-output { display: block; }
+.app-shell .section-return { display: inline-flex; min-height: 44px; align-items: center; margin-block-end: 12px; }
+.app-shell .section-return[hidden] { display: none; }
+/* Wrap prose; scroll only bounded tables, code and long detail bodies. */
+.app-shell :is(.panel,.side-panel,.config-panel,.result-panel,.factor-expression-area) { min-width: 0; }
+.app-shell :is(.panel-heading,.side-heading) { flex-wrap: wrap; gap: 12px; }
+.app-shell :is(.panel-heading,.side-heading) > div { min-width: 0; }
+.app-shell :is(.result-table strong,.governance-grid strong,.utility-row strong,
+  .factor-mining-guardrails dd,.factor-mining-feedback,.benchmark-result,.monthly-result) {
+  white-space: normal; overflow-wrap: anywhere; text-overflow: clip;
+}
+.app-shell :is(.table-scroll,.table-wrap,.holdings-table-wrap,.paper-orders-table-wrap,
+  .factor-report-content pre,.ledger-entries,.utility-copy pre) {
+  overflow: auto; overscroll-behavior: contain; max-width: 100%;
+}
+.app-shell :is(.ledger-entries,.factor-report-content pre,.utility-copy pre) { max-height: 360px; }
+.app-shell .pie-hover-detail {
+  grid-template-rows: minmax(24px,auto) 24px 24px;
+  line-height: 1.5; color: var(--text); overflow-wrap: anywhere;
+}
+/* A long security name cannot resize the plot on hover either. */
+.app-shell .pie-hover-detail strong { max-height: 48px; overflow-y: auto; color: var(--text); }
+.app-shell .pie-hover-detail span { color: var(--muted); }
+.app-shell details > summary { text-underline-offset: 3px; }
+/* Plain status chips must not retain light-only text or background colors. */
+html[data-theme] .app-shell .status-chip.neutral { color: var(--muted); background: var(--panel2); }
+.utility-dialog-head { flex-wrap: wrap; gap: 12px; }
+#utilityDialogClose { white-space: nowrap; min-height: 44px; padding-inline: 16px; }
+.paper-catchup-tools { display: flex; align-items: center; flex-wrap: wrap; gap: var(--space-3); margin-block: var(--space-4); min-width: 0; }
+.paper-catchup-tools p { margin: 0; color: var(--text); line-height: var(--leading-normal); overflow-wrap: anywhere; }
+#paperManualCatchupResult { flex-basis: 100%; }
+#paperManualCatchupButton { min-height: 44px; }
+.paper-catchup-dialog p { line-height: var(--leading-normal); overflow-wrap: anywhere; }
+
+/* === backtest experiment IA 2026-10-15 === */
+.app-shell .config-panel .config-section {
+  margin: var(--space-4) 0 0;
+  padding: var(--space-3) 0 0;
+  border-top: 1px solid var(--line, rgba(127, 127, 127, 0.22));
+}
+.app-shell .config-panel .config-section:first-of-type {
+  margin-top: var(--space-3);
+  padding-top: var(--space-2);
+  border-top: 0;
+}
+.app-shell .config-section__title {
+  margin: 0 0 var(--space-3);
+  font: var(--weight-semibold, 600) var(--text-sm, 0.8125rem) / 1.4 var(--font-ui, system-ui);
+  color: var(--muted, #798da0);
+  letter-spacing: 0.02em;
+}
+.app-shell .config-section__params {
+  display: grid;
+  gap: var(--space-2);
+  margin: var(--space-2) 0 var(--space-3);
+}
+.app-shell .feature-store-mount:empty {
+  min-height: 0;
+}
+.app-shell .feature-store-mount .feature-store-panel {
+  margin-top: var(--space-3);
+}
+.app-shell .config-actions {
+  margin-top: var(--space-5);
+  display: grid;
+  gap: var(--space-2);
+}
+.app-shell .config-sensitivity-link {
+  justify-self: start;
+  padding: var(--space-1) 0;
+  font-weight: var(--weight-normal, 400);
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+.app-shell .experiment-progress__kind {
+  display: inline-flex;
+  align-items: center;
+  margin-right: var(--space-2);
+  padding: 0.1em 0.45em;
+  border-radius: 999px;
+  border: 1px solid var(--line, rgba(127, 127, 127, 0.28));
+  font-size: var(--text-xs, 0.75rem);
+  color: var(--muted, #798da0);
+  white-space: nowrap;
+}
+.app-shell .backtest-progress[data-kind="feature_warmup"] .experiment-progress__kind {
+  color: var(--purple, #7c6cff);
+  border-color: color-mix(in srgb, var(--purple, #7c6cff) 40%, transparent);
+}
+.app-shell .result-empty {
+  color: var(--muted, #798da0);
+}
+.app-shell .result-empty__guide {
+  margin: 0;
+}
+.app-shell .result-empty__guide strong {
+  color: var(--text, inherit);
+  font-weight: var(--weight-semibold, 600);
+}
+.app-shell .config-panel .rulebook-editor {
+  margin: var(--space-3) 0;
+}
+.app-shell .config-panel .rulebook-editor[hidden] {
+  display: none !important;
+}
+
+/* === backtest results density 2026-10-15-ui2 === */
+/* Right column should not stretch to left-column height when empty. */
+.app-shell .backtest-layout > .backtest-results {
+  align-self: start;
+  width: 100%;
+  min-height: 0;
+  padding: var(--space-4) var(--space-4) var(--space-3);
+  box-sizing: border-box;
+}
+.app-shell .backtest-results > .panel-heading {
+  margin-bottom: var(--space-2);
+  gap: var(--space-2);
+}
+.app-shell .backtest-results > .panel-heading h2 {
+  margin: 0;
+  font-size: var(--text-md, 1rem);
+  line-height: 1.25;
+}
+.app-shell .backtest-results .panel-kicker {
+  margin-bottom: 0.15rem;
+  font-size: var(--text-xs, 0.75rem);
+}
+.app-shell .backtest-results .experiment-id {
+  font-size: var(--text-xs, 0.75rem);
+}
+
+/* Compact empty state — no giant dashed slab */
+.app-shell .backtest-results .result-empty {
+  margin-top: var(--space-2);
+  margin-bottom: 0;
+  padding: var(--space-3) var(--space-3);
+  border-style: dashed;
+  border-width: 1px;
+  border-radius: 10px;
+  max-width: 36rem;
+  background: transparent;
+}
+.app-shell .backtest-results .result-empty__guide {
+  font-size: var(--text-sm, 0.8125rem);
+  line-height: 1.45;
+}
+
+/* Filled body: tighter KPI / chart / table */
+.app-shell .backtest-results .result-body {
+  margin-top: var(--space-1);
+}
+.app-shell .backtest-results .result-hero {
+  margin-top: var(--space-3);
+  gap: var(--space-2);
+}
+.app-shell .backtest-results .result-hero div {
+  padding-right: var(--space-2);
+}
+.app-shell .backtest-results .result-hero span {
+  font-size: var(--text-xs, 0.75rem);
+  line-height: 1.2;
+}
+.app-shell .backtest-results .result-hero strong {
+  margin-top: 0.15rem;
+  font-size: var(--text-md, 1rem);
+  line-height: 1.2;
+}
+.app-shell .backtest-results .mini-y-axis-title {
+  margin: var(--space-2) 0 0 var(--space-3);
+  font-size: var(--text-xs, 0.75rem);
+}
+.app-shell .backtest-results .mini-chart-wrap {
+  height: 108px;
+  margin: var(--space-1) 0 0;
+  border-radius: 8px;
+}
+.app-shell .backtest-results .mini-x-axis-row {
+  margin: 0.15rem var(--space-2) var(--space-2) var(--space-3);
+}
+.app-shell .backtest-results .mini-axis-labels,
+.app-shell .backtest-results .chart-x-axis-title {
+  font-size: var(--text-xs, 0.75rem);
+}
+.app-shell .backtest-results .result-table {
+  margin-top: var(--space-2);
+  border-top: 1px solid var(--line, rgba(127, 127, 127, 0.22));
+}
+.app-shell .backtest-results .result-table div {
+  padding: 0.35rem 0;
+  gap: var(--space-3);
+  font-size: var(--text-sm, 0.8125rem);
+  line-height: 1.35;
+}
+.app-shell .backtest-results .result-table span {
+  color: var(--muted, #798da0);
+}
+.app-shell .backtest-results .result-table strong {
+  font-size: var(--text-sm, 0.8125rem);
+  text-align: right;
+}
+
+@media (max-width: 1060px) {
+  .app-shell .backtest-layout > .backtest-results {
+    align-self: stretch;
+  }
+  .app-shell .backtest-results .mini-chart-wrap {
+    height: 100px;
+  }
+}
+
+/* === backtest flow layout 2026-10-15-ui6 === */
+/* Vertical process: ① data → ② strategy → ③ universe → ④ run → ⑤ results */
+.app-shell #backtest .backtest-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-auto-rows: auto;
+  row-gap: var(--space-4);
+  width: 100%;
+  max-width: none;
+  margin-inline: 0;
+  justify-items: stretch;
+  align-content: start;
+}
+.app-shell #backtest .backtest-layout > .config-panel,
+.app-shell #backtest .backtest-layout > .backtest-results {
+  width: 100%;
+  max-width: none;
+  min-width: 0;
+  justify-self: stretch;
+  box-sizing: border-box;
+  padding: var(--space-4);
+}
+
+.app-shell #backtest .config-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0;
+}
+.app-shell #backtest .config-panel > .panel-kicker {
+  margin-bottom: 0.15rem;
+}
+.app-shell #backtest .config-panel > h2 {
+  margin: 0 0 var(--space-3);
+  font-size: var(--text-md, 1rem);
+}
+
+/* Each flow step is a full-width layer with shared title/grid rhythm */
+.app-shell #backtest .config-section {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--space-3);
+  margin: 0;
+  padding: var(--space-4) 0;
+  border: 0;
+  border-top: 1px solid var(--line, rgba(127, 127, 127, 0.22));
+  border-inline-end: 0;
+  min-width: 0;
+}
+.app-shell #backtest .config-section:first-of-type {
+  border-top: 0;
+  padding-top: var(--space-2);
+}
+.app-shell #backtest .config-section__title {
+  margin: 0;
+  font: var(--weight-semibold, 600) var(--text-sm, 0.8125rem) / 1.35 var(--font-ui, system-ui);
+  color: var(--muted, #798da0);
+  letter-spacing: 0.02em;
+}
+.app-shell #backtest .config-section__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-3);
+  min-width: 0;
+}
+.app-shell #backtest .config-section__head .config-section__title {
+  flex: 1 1 auto;
+}
+.app-shell #backtest .config-section__head .research-workflow-guide {
+  margin: 0;
+  flex: 0 1 auto;
+  max-width: 14rem;
+  font-size: var(--text-xs, 0.75rem);
+  line-height: 1.35;
+}
+.app-shell #backtest .config-section__head .research-workflow-guide summary {
+  cursor: pointer;
+  white-space: nowrap;
+  font-weight: var(--weight-semibold, 600);
+}
+.app-shell #backtest .config-section__head .research-workflow-guide p {
+  max-width: 36rem;
+  margin: var(--space-2) 0 0;
+  white-space: normal;
+}
+
+/* Shared 2-col field grid — titles/controls align across steps */
+.app-shell #backtest .config-section__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: var(--space-4);
+  row-gap: var(--space-3);
+  align-items: start;
+}
+.app-shell #backtest .config-section__grid > label {
+  margin-top: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  min-width: 0;
+}
+.app-shell #backtest .config-section__grid .select-wrap,
+.app-shell #backtest .config-section__grid input,
+.app-shell #backtest .config-section__grid select,
+.app-shell #backtest .config-section__grid .date-fields {
+  width: 100%;
+  max-width: none;
+  box-sizing: border-box;
+}
+.app-shell #backtest .config-section__params {
+  margin: 0;
+}
+.app-shell #backtest .config-section__params > label,
+.app-shell #backtest .config-section__params > small {
+  min-width: 0;
+}
+.app-shell #backtest .config-section__params > small {
+  grid-column: 1 / -1;
+}
+
+.app-shell #backtest .feature-store-mount,
+.app-shell #backtest .feature-store-panel,
+.app-shell #backtest .rulebook-editor {
+  width: 100%;
+  max-width: none;
+}
+.app-shell #backtest .rulebook-editor[hidden] {
+  display: none !important;
+}
+
+.app-shell #backtest .config-section__universe-tools {
+  display: grid;
+  gap: var(--space-2);
+}
+.app-shell #backtest .index-universe-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) auto auto;
+  gap: var(--space-2);
+  align-items: center;
+}
+.app-shell #backtest .config-section .config-note {
+  margin: 0;
+}
+
+/* ④ run layer */
+.app-shell #backtest .config-section--run .config-actions {
+  display: grid;
+  gap: var(--space-3);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  width: 100%;
+}
+.app-shell #backtest .config-actions__primary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3);
+}
+.app-shell #backtest .config-actions__primary .primary-button {
+  width: auto;
+  min-width: 11rem;
+}
+.app-shell #backtest .config-actions .backtest-progress,
+.app-shell #backtest .config-actions .sensitivity-result {
+  width: 100%;
+  max-width: none;
+}
+
+/* ⑤ results */
+.app-shell #backtest .backtest-results > .panel-heading {
+  margin-bottom: var(--space-2);
+}
+.app-shell #backtest .backtest-results .result-empty {
+  margin-top: var(--space-2);
+  padding: var(--space-3);
+  max-width: 42rem;
+  border: 1px dashed var(--line, rgba(127, 127, 127, 0.35));
+  border-radius: 10px;
+  background: transparent;
+}
+.app-shell #backtest .backtest-results .result-hero {
+  margin-top: var(--space-2);
+  max-width: 36rem;
+}
+.app-shell #backtest .backtest-results .mini-chart-wrap {
+  height: 168px;
+}
+.app-shell #backtest .backtest-results .result-table {
+  max-width: 48rem;
+}
+
+@media (max-width: 860px) {
+  .app-shell #backtest .config-section__grid {
+    grid-template-columns: 1fr;
+  }
+  .app-shell #backtest .index-universe-row {
+    grid-template-columns: 1fr;
+  }
+  .app-shell #backtest .backtest-results .mini-chart-wrap {
+    height: 120px;
+  }
+}
+
+/* === backtest content width align 2026-10-15-ui8 === */
+/*
+ * Other feature pages (overview/research/risk/paper) fill .page-wrap:
+ *   max-width: 1560px; horizontal padding from page-wrap.
+ * Do NOT shrink #backtest children with a nested 72rem column.
+ * All direct blocks span the same content width as sibling pages.
+ */
+.app-shell #backtest {
+  --backtest-content-max: none; /* fill page-wrap (1560px), same as other pages */
+  width: 100%;
+  max-width: none;
+  box-sizing: border-box;
+}
+.app-shell #backtest > .page-heading,
+.app-shell #backtest > .backtest-default-display,
+.app-shell #backtest > .backtest-layout,
+.app-shell #backtest > .governance-section {
+  width: 100%;
+  max-width: none;
+  margin-inline: 0;
+  box-sizing: border-box;
+}
+.app-shell #backtest > .section-return {
+  width: auto;
+  max-width: none;
+  margin-inline: 0;
+}
+.app-shell #backtest .backtest-layout {
+  width: 100%;
+  max-width: none;
+  margin-inline: 0;
+}
+.app-shell #backtest .backtest-layout > .config-panel,
+.app-shell #backtest .backtest-layout > .backtest-results {
+  width: 100%;
+  max-width: none;
+}
+.app-shell #backtest > .governance-section {
+  margin-block-start: var(--space-4);
+}
+/* Keep internal result copy readable, but panels themselves stay full content width */
+.app-shell #backtest .backtest-results .result-empty {
+  max-width: 42rem;
+}
+
+
+/* === A-pi design system P0/P1 overrides (2026-10-15) === */
+.app-shell .section-return { display: none !important; }
+
+/* Button hierarchy */
+.app-shell .primary-button {
+  background: var(--purple-strong, var(--purple));
+  color: #fff;
+  border: 1px solid transparent;
+  width: auto;
+  max-width: max-content;
+}
+.app-shell .secondary-button {
+  background: var(--panel2);
+  color: var(--text);
+  border: 1px solid var(--line);
+  width: auto;
+  max-width: max-content;
+}
+.app-shell .text-button {
+  background: transparent;
+  color: var(--purple);
+  border: 0;
+  width: auto;
+  box-shadow: none;
+}
+.app-shell .danger-button,
+.app-shell button.danger-button {
+  background: transparent;
+  color: var(--status-danger);
+  border: 1px solid var(--status-danger);
+  min-height: 44px;
+  border-radius: var(--control-radius, 999px);
+  padding: 0 var(--space-4);
+  font: inherit;
+  font-size: var(--text-base);
+  font-weight: var(--weight-bold);
+  cursor: pointer;
+  width: auto;
+  max-width: max-content;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.app-shell .danger-button:hover {
+  background: var(--status-danger);
+  color: #fff;
+}
+.app-shell .danger-button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* Stop config action rows from stretching to full content width */
+.app-shell #backtest .config-actions,
+.app-shell #backtest .governance-action-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  align-items: center;
+  width: auto;
+}
+.app-shell #backtest .config-actions > :is(button, a),
+.app-shell #backtest .governance-action-buttons > button {
+  width: auto;
+  max-width: max-content;
+  flex: 0 0 auto;
+}
+.app-shell #backtest .config-sensitivity-link {
+  display: inline-flex;
+  width: auto;
+  max-width: max-content;
+}
+.app-shell #backtest .universe-button {
+  width: auto;
+  max-width: max-content;
+  justify-self: start;
+}
+.app-shell .stock-picker-host {
+  background: var(--panel2);
+  border: 1px solid var(--line);
+  color: var(--text);
+}
+.app-shell .stock-chip-list:not(:empty) {
+  background: transparent;
+}
+.app-shell .stock-chip-list:not(:empty) + .stock-search-field {
+  border-top-color: var(--line);
+}
+
+/* Status chips / limits use status tokens */
+.app-shell .limit-ok { color: var(--status-ok) !important; }
+.app-shell .limit-warn { color: var(--status-warn) !important; }
+.app-shell .limit-breach,
+.app-shell .limit-danger { color: var(--status-danger) !important; }
+html[data-theme] .app-shell :is(.status-chip.good,.order-status.filled) {
+  color: var(--status-ok);
+}
+html[data-theme] .app-shell :is(.status-chip.warning,.order-status.partial) {
+  color: var(--status-warn);
+}
+html[data-theme] .app-shell :is(.status-chip.bad,.order-status.rejected,.order-status.cancelled) {
+  color: var(--status-danger);
+}
+
+/* Body readability */
+.app-shell,
+.app-shell .page-section {
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+}
+.app-shell .page-heading p,
+.app-shell .panel-heading p,
+.app-shell .config-panel > p,
+.app-shell .notice-bar,
+.app-shell .governance-action-note {
+  font-size: var(--text-base);
+  color: var(--muted);
+  line-height: 1.55;
+  max-width: 72ch;
+}
+
+/* Research paper action bar: keep one visual primary slot */
+.app-shell .research-paper-panel .heading-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+.app-shell .research-paper-panel .heading-actions .secondary-button {
+  font-weight: var(--weight-medium, 500);
+}
+.app-shell .research-paper-panel .heading-actions .danger-button {
+  order: 10;
+}
+
+/* Buy/sell direction follows 红涨绿跌 */
+.app-shell td.buy,
+.app-shell .side-buy,
+.app-shell .signal-tag.buy { color: var(--up) !important; }
+.app-shell td.sell,
+.app-shell .side-sell,
+.app-shell .signal-tag.sell { color: var(--down) !important; }
+
+
+/* === A-pi IA / P2-P3 (2026-10-15) === */
+.app-shell .nav-group-label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 12px 0 4px;
+  padding: 0;
+  color: var(--sidebar-muted, var(--muted));
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: none;
+  text-align: center;
+}
+.app-shell .nav-group-label--system {
+  margin-top: 18px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255,255,255,.08);
+}
+.app-shell .workbench-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: 0 0 16px;
+  padding: 4px;
+  border-radius: 12px;
+  background: var(--panel2);
+  border: 1px solid var(--line);
+}
+.app-shell .workbench-tab {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  min-height: 36px;
+  padding: 0 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font: inherit;
+}
+.app-shell .workbench-tab.is-active {
+  background: var(--panel);
+  color: var(--text);
+  box-shadow: 0 1px 2px rgba(16,24,40,.06);
+  font-weight: 600;
+}
+.app-shell .workbench-tab-panel[hidden] { display: none !important; }
+.app-shell .workbench-tab-panel { min-width: 0; }
+.app-shell .ia-tab-stack,
+.app-shell .ia-tab-host { min-width: 0; }
+.app-shell .ia-tab-hint,
+.app-shell .ia-moved-note { color: var(--muted); font-size: var(--text-sm); }
+
+.app-shell .action-menu {
+  position: relative;
+  display: inline-block;
+}
+.app-shell .action-menu > summary {
+  list-style: none;
+  cursor: pointer;
+}
+.app-shell .action-menu > summary::-webkit-details-marker { display: none; }
+.app-shell .action-menu__list {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 6px);
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 220px;
+  padding: 10px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  box-shadow: 0 12px 28px rgba(0,0,0,.22);
+}
+.app-shell .action-menu__list > button { width: 100%; justify-content: flex-start; }
+
+/* Light theme: flat cards */
+html[data-theme="light"] .app-shell :is(.panel,.metric-card,.paper-kpi,.research-stat,.side-panel) {
+  background: #fff;
+  border: 1px solid var(--line);
+  box-shadow: 0 1px 2px rgba(16,24,40,.06);
+}
+html:not([data-theme="dark"]) .app-shell :is(.panel,.metric-card,.paper-kpi,.research-stat,.side-panel) {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  box-shadow: 0 1px 2px rgba(16,24,40,.05);
+}
+html[data-theme="dark"] .app-shell :is(.panel,.metric-card,.paper-kpi,.research-stat,.side-panel) {
+  box-shadow: none;
+}
+
+/* Tables */
+.app-shell table tbody tr:nth-child(even) { background: color-mix(in srgb, var(--panel2) 65%, transparent); }
+html[data-theme="dark"] .app-shell table tbody tr:nth-child(even) { background: rgba(255,255,255,.03); }
+.app-shell .order-status.filled,
+.app-shell .status-chip.good,
+.app-shell .result-pass { color: var(--status-ok) !important; }
+
+/* Chart chrome quieter */
+.app-shell .chart-controls,
+.app-shell .chart-zoom-tools {
+  gap: 4px;
+  opacity: .85;
+}
+.app-shell .chart-controls button,
+.app-shell .chart-zoom-tools button {
+  min-height: 28px;
+  padding: 0 8px;
+  font-size: var(--text-xs);
+}
+
+
+/* === P3 form / run / sidebar polish 2026-10-15 === */
+.app-shell #backtest #backtestInitialCash,
+.app-shell #backtest #backtestMinListingSessions,
+.app-shell #backtest #backtestTopN,
+.app-shell #backtest .backtest-topn-control .select-wrap select {
+  text-align: center;
+}
+.app-shell #backtest .config-section__grid {
+  align-items: stretch;
+}
+.app-shell #backtest .config-section__grid > label {
+  justify-content: flex-start;
+  min-height: 100%;
+}
+.app-shell #backtest .config-section__grid > label > :is(input, select, .select-wrap) {
+  margin-top: auto;
+}
+.app-shell #backtest .config-section__params.strategy-params-balanced {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: var(--space-4);
+  row-gap: var(--space-3);
+  align-items: start;
+}
+.app-shell #backtest .config-section__params.strategy-params-balanced > label[data-span="full"],
+.app-shell #backtest .config-section__params.strategy-params-balanced > .strategy-params-note {
+  grid-column: 1 / -1;
+}
+.app-shell #backtest .config-section__params.strategy-params-balanced > label {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin: 0;
+  min-width: 0;
+}
+.app-shell #backtest .config-section__params.strategy-params-balanced .backtest-topn-note,
+.app-shell #backtest .config-section__params .backtest-topn-note {
+  display: none; /* moved to title/tooltip to keep columns level */
+}
+.app-shell #backtest .config-section--run .config-actions__primary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--space-3);
+  width: 100%;
+}
+.app-shell #backtest .config-section--run .config-actions__primary .secondary-button,
+.app-shell #backtest .config-section--run .config-actions__primary .text-button,
+.app-shell #backtest .config-section--run .config-actions__primary .ghost-button {
+  order: 1;
+  margin-right: auto;
+}
+.app-shell #backtest .config-section--run .config-actions__primary .primary-button {
+  order: 2;
+  margin-left: 0;
+  min-width: 12rem;
+}
+.app-shell #backtest .config-section--run .config-actions__primary .config-sensitivity-link {
+  order: 0;
+  margin-right: auto;
+  justify-self: start;
+}
+.app-shell .auth-options + #rememberHint,
+.app-shell #rememberHint.auth-hint {
+  /* keep for a11y; hide duplicate visible copy under checkbox */
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* P3: when sidebar is icon-rail (~88px), center icons under group labels */
+.app-shell .sidebar-dock .sidebar {
+  /* no behavior change */
+}
+@media (max-width: 99999px) {
+  .app-shell .sidebar-dock .nav-group-label {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    text-align: center;
+  }
+}
+
+
+/* === dup-fix 2026-10-16: single research tab surface === */
+.app-shell .workbench-tab-panel[hidden] {
+  display: none !important;
+}
+.app-shell #research details.workbench-disclosure:not(:has(:not(summary))) {
+  display: none;
+}
+
+
+/* === P4 2026-10-16 === */
+.app-shell .site-footer,
+.site-footer { display: none !important; }
+
+.app-shell .visually-hidden {
+  position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+.app-shell .research-paper-actions {
+  display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: flex-end;
+}
+.app-shell .research-paper-actions > button { margin: 0; }
+
+/* === universefix 2026-10-16 === */
+/* === widthfix 2026-10-16: match strategy params full content width === */
+.app-shell #backtest .universe-align-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: var(--space-4);
+  row-gap: var(--space-3);
+  align-items: stretch;
+  width: 100%;
+  max-width: none;
+  margin-inline: 0;
+  box-sizing: border-box;
+}
+.app-shell #backtest .universe-rebalance-label,
+.app-shell #backtest .universe-range-label {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-width: 0;
+  margin: 0;
+  height: 100%;
+}
+.app-shell #backtest .universe-rebalance-label > .select-wrap,
+.app-shell #backtest .universe-range-label > .date-fields {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-top: 0;
+  min-height: 2.75rem;
+  height: 2.75rem;
+  box-sizing: border-box;
+}
+.app-shell #backtest .universe-rebalance-label > .select-wrap {
+  position: relative;
+}
+.app-shell #backtest .universe-rebalance-label select {
+  width: 100%;
+  height: 2.75rem;
+  min-height: 2.75rem;
+  box-sizing: border-box;
+}
+.app-shell #backtest .universe-range-label .date-fields {
+  gap: var(--space-2);
+}
+.app-shell #backtest .universe-range-label .date-fields input {
+  flex: 1 1 0;
+  width: auto;
+  min-width: 0;
+  height: 2.75rem;
+  min-height: 2.75rem;
+  box-sizing: border-box;
+}
+.app-shell #backtest .universe-pool-label {
+  grid-column: 1 / -1;
+}
+.app-shell #backtest .universe-pool-label .select-wrap,
+.app-shell #backtest .universe-pool-label .stock-picker-host,
+.app-shell #backtest .universe-pool-label input {
+  width: 100%;
+  max-width: none;
+}
+.app-shell #backtest .config-section__universe-tools,
+.app-shell #backtest #backtestUniverseSection .config-note {
+  width: 100%;
+  max-width: none;
+  margin-inline: 0;
+  box-sizing: border-box;
+}
+.app-shell #backtest .config-section__universe-tools:has(> #allUniverseButton:only-child),
+.app-shell #backtest .config-section__universe-tools:empty {
+  display: none;
+}
+/* Browse link lives inside the search field now */
+.app-shell .stock-search-field {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-width: 0;
+}
+.app-shell .stock-search-field > input {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.app-shell .stock-search-browse {
+  flex: 0 0 auto;
+  margin: 0;
+  padding: 0.15rem 0.35rem;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  color: var(--accent, var(--paint-7052c9, #7052c9));
+  font-size: var(--type-meta, 12px);
+  line-height: 1.2;
+  white-space: nowrap;
+  cursor: pointer;
+  width: auto;
+  max-width: none;
+  justify-self: auto;
+}
+.app-shell .stock-search-browse:hover {
+  text-decoration: underline;
+  background: transparent;
+}
+.app-shell .stock-search-browse:focus-visible {
+  outline: 2px solid var(--accent, #7052c9);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.app-shell #backtest .config-section--run .config-actions__primary {
+  display: flex; flex-wrap: wrap; align-items: center;
+  justify-content: space-between; gap: var(--space-3); width: 100%;
+}
+.app-shell #backtest .config-section--run .config-actions__primary .primary-button {
+  order: 1; margin-right: auto; min-width: 12rem;
+}
+.app-shell #backtest .config-section--run .config-actions__primary .backtest-restore-button,
+.app-shell #backtest .config-section--run .config-actions__primary .secondary-button.ghost-button {
+  order: 2; margin-left: auto;
+}
+.app-shell #backtest .config-section--run .config-actions__primary .config-sensitivity-link {
+  order: 3; flex-basis: 100%; margin: 0;
+}
+
+/* === alignfix 2026-10-16 PCR/IV twin cards === */
+.app-shell .data-extension-panel__charts,
+.app-shell .data-extension-panel__series.data-extension-panel__charts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-3);
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  align-items: stretch;
+}
+.app-shell .data-extension-chart-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  margin: 0;
+  height: 100%;
+  box-sizing: border-box;
+}
+.app-shell .data-extension-chart-card > h5 {
+  margin: 0 0 var(--space-1);
+  min-height: 2.8em;
+  line-height: 1.35;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.app-shell .data-extension-chart-meta {
+  margin: 0 0 var(--space-2);
+  min-height: 2.7em;
+  font-size: var(--text-xs, 12px);
+  line-height: 1.35;
+  color: var(--muted);
+}
+.app-shell .data-extension-chart-body {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  min-width: 0;
+}
+.app-shell .data-extension-chart-card .financial-chart {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+  height: 100%;
+}
+.app-shell .data-extension-chart-card .financial-chart-plot {
+  flex: 1 1 auto;
+  width: 100%;
+  height: 280px;
+  min-height: 280px;
+  max-height: 280px;
+}
+.app-shell .data-extension-chart-card .financial-chart-controls {
+  flex: 0 0 auto;
+  margin-block: var(--space-2) 0;
+  margin-inline: 0;
+}
+.app-shell .data-extension-chart-card .financial-chart > details {
+  flex: 0 0 auto;
+  margin-block: var(--space-2) 0;
+  margin-inline: 0;
+}
+.app-shell .data-extension-chart-card .financial-chart > details > summary {
+  text-align: left;
+  list-style-position: outside;
+}
+.app-shell .data-extension-disclosure {
+  margin: var(--space-2) 0 0; padding: 0; border: 0; background: transparent;
+}
+.app-shell .data-extension-disclosure > summary {
+  display: flex; align-items: center; gap: 0.5rem;
+  cursor: pointer; list-style: none; padding: 0.4rem 0; margin: 0;
+}
+.app-shell .data-extension-disclosure > summary::-webkit-details-marker { display: none; }
+.app-shell .data-extension-disclosure > summary::before {
+  content: "▶"; display: inline-block; width: 1em; flex: 0 0 1em;
+  font-size: 0.75em; line-height: 1; color: var(--muted);
+}
+.app-shell .data-extension-disclosure[open] > summary::before { content: "▼"; }
+.app-shell .data-extension-hint {
+  margin: 0.35rem 0 0.5rem; color: var(--muted); font-size: var(--text-xs, 12px);
+  line-height: 1.35; max-width: 100%;
+}
+.app-shell .data-extension-panel__table { margin-top: var(--space-2); width: 100%; box-sizing: border-box; }
+
+/* === loginfix 2026-10-16 === */
+.auth-card-footer > span {
+  display: none !important;
+}
+.auth-card-footer {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: var(--space-3, 0.75rem);
+  margin-top: var(--space-4, 1rem);
+  padding-top: var(--space-4, 1rem);
+  border-top: 1px solid var(--line, rgba(128,128,128,.22));
+  box-sizing: border-box;
+}
+.auth-card-footer :is(.language-control, .theme-control) {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(7.5rem, 10rem);
+  align-items: center;
+  gap: var(--space-3, 0.75rem);
+  width: 100%;
+  margin: 0;
+  min-height: 2.75rem;
+  flex: 0 0 auto;
+}
+.auth-card-footer :is(.language-control select, .theme-control select) {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  height: 2.5rem;
+  min-height: 2.5rem;
+  max-height: 2.5rem;
+  padding: 0 var(--space-3, 0.75rem);
+}
+
+/* Ops twin cards: keep separate rounded panels with clear gap */
+.app-shell #ops .ia-page-body,
+.app-shell [data-ia-body="ops"] {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5, 1.25rem);
+}
+.app-shell #ops .ia-page-body > .panel,
+.app-shell [data-ia-body="ops"] > .panel {
+  margin: 0;
+  border-radius: var(--radius, 12px);
+  border: 1px solid var(--line);
+  box-shadow: var(--card-shadow, 0 1px 2px rgba(0,0,0,.04));
+}
+/* widthfix 2026-10-16: section */
+
+.app-shell #backtest #backtestUniverseSection {
+  padding-inline: 0;
+  margin-inline: 0;
+  max-width: none;
+}
+.app-shell #backtest #backtestStrategySection,
+.app-shell #backtest #backtestStrategyParams {
+  max-width: none;
+}
+
+/* === tipfix 2026-10-16: never show data-source notice banners === */
+.app-shell .notice-bar,
+.notice-bar {
+  display: none !important;
+}
+
+/* === chipx 2026-10-16: center chip remove × === */
+.app-shell .stock-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  min-height: 1.75rem;
+  box-sizing: border-box;
+  padding: 0.15rem 0.2rem 0.15rem 0.5rem;
+  line-height: 1.2;
+}
+.app-shell .stock-chip-copy {
+  display: inline-flex;
+  align-items: center; /* was baseline — kept × optical center with text */
+  gap: 0.25rem;
+  min-width: 0;
+  line-height: 1.2;
+}
+.app-shell .stock-chip-copy strong,
+.app-shell .stock-chip-copy small {
+  line-height: 1.2;
+  display: inline-block;
+  vertical-align: middle;
+}
+.app-shell .stock-chip-remove {
+  box-sizing: border-box;
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  min-width: 1.25rem;
+  min-height: 1.25rem;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--paint-8b78c4, #8b78c4);
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0;
+  text-align: center;
+  appearance: none;
+  -webkit-appearance: none;
+}
+.app-shell .stock-chip-remove:hover {
+  background: var(--paint-e4dcfb, #e4dcfb);
+  color: var(--paint-6045b3, #6045b3);
+}

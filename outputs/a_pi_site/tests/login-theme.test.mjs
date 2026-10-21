@@ -1,0 +1,20 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {JSDOM} from 'jsdom';
+import {installTheme} from '../dist/theme.mjs';
+test('login theme selector shares preference with workbench, persists and respects system changes',()=>{
+ const dom=new JSDOM('<html><body><div class="auth-card-footer"></div><div class="topbar"></div></body></html>',{url:'http://localhost'});
+ globalThis.window=dom.window;globalThis.document=dom.window.document;
+ let systemChanged;const media={matches:true,addEventListener:(name,callback)=>{systemChanged=callback}};
+ window.matchMedia=()=>media;window.localStorage.setItem('a_pi_theme','light');
+ installTheme();const [login,workbench]=document.querySelectorAll('.theme-control select');
+ assert.deepEqual([...login.options].map(o=>o.value),['system','light','dark']);
+ assert.equal(login.closest('form'),null);assert.equal(document.documentElement.dataset.theme,'light');
+ login.value='dark';login.dispatchEvent(new window.Event('change'));
+ assert.equal(workbench.value,'dark');assert.equal(window.localStorage.getItem('a_pi_theme'),'dark');
+ workbench.value='system';workbench.dispatchEvent(new window.Event('change'));
+ media.matches=false;systemChanged();assert.equal(login.value,'system');assert.equal(document.documentElement.dataset.theme,'light');
+ login.value='dark';login.dispatchEvent(new window.Event('change'));systemChanged();assert.equal(document.documentElement.dataset.theme,'dark');
+ window.dispatchEvent(new window.StorageEvent('storage',{key:'a_pi_theme',newValue:'light'}));assert.equal(login.value,'light');assert.equal(workbench.value,'light');
+ dom.window.close();
+});

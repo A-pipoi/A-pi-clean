@@ -1,0 +1,38 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "checkJs": true,
+    "noEmit": true,
+    "strict": true,
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "skipLibCheck": true
+  },
+  "include": [
+    "dist/**/*.js",
+    "dist/**/*.mjs",
+    "dist/backtest-research-controls.mjs",
+    "dist/backtest-runner.mjs",
+    "dist/charts.mjs",
+    "dist/app.js",
+    "dist/factor-mining-panel.mjs",
+    "dist/experiment-comparison.mjs",
+    "dist/factor-registration.mjs",
+    "dist/financial-statements-panel.mjs",
+    "dist/feature-store-panel.mjs",
+    "dist/i18n.js",
+    "dist/locale-dictionary.js",
+    "dist/market-ticker.mjs",
+    "dist/notification-center.mjs",
+    "dist/paper-page.mjs",
+    "dist/research-governance-actions.mjs",
+    "dist/portfolio-optimizer.js",
+    "dist/risk-view.js",
+    "dist/strategy-search.mjs",
+    "dist/stock-picker.mjs",
+    "types/**/*.d.ts"
+  ],
+  "exclude": ["node_modules", "build"]
+}

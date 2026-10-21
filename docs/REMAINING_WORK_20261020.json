@@ -1,0 +1,21 @@
+{
+  "scope": "independent private release copy only; production source is protected",
+  "baseline_commit": "85f2cfd9c1f4d9f8a08a8a06e09f193630fe0f34",
+  "items": [
+    {"id": "license-decision", "status": "completed", "evidence": "LICENSE; MIT chosen by user, only rights-owned code"},
+    {"id": "snapshot-artwork", "status": "completed", "evidence": "9 role-image paths removed from current snapshot, original geometric SVG used"},
+    {"id": "credential-destination-guards", "status": "completed_in_copy", "evidence": "No redirects, explicit HTTPS URL validation, response bounds and redacted errors; tests/test_provider_security.py"},
+    {"id": "optimized-verification", "status": "completed_in_copy", "evidence": "Explicit rejection in verification scripts; tests/test_release_security_guards.py; no real model/service acceptance executed"},
+    {"id": "archive-schema-quoting", "status": "completed_in_copy", "evidence": "Schema identifiers quoted, in-memory fixture tested; no production archival performed"},
+    {"id": "reachable-history-automated-review", "status": "completed_at_baseline", "evidence": "7 commits, 1125 distinct blobs, 1119 UTF-8 source versions scanned; hashes verified; docs/GIT_HISTORY_REVIEW_20261020.md"},
+    {"id": "third-party-evidence", "status": "needs_upstream_evidence_and_environment_lock", "remaining": 17, "evidence": "docs/third-party/FOLLOWUP.json", "required": "14 exact-version upstream notice gaps; optional Python akshare/rq need deliberate environment version selection; backend redis constraint not covered by data-environment redis 8.1.0 evidence", "prohibited_shortcut": "Do not fabricate notices or choose an unrelated version and call it licensed"},
+    {"id": "manual-security-and-provenance", "status": "not_fully_completed", "evidence": "docs/SECURITY_FOLLOWUP_20261020.md", "required": "Complete independent input-to-sink review, deployment endpoint/PATH/proxy trust assessment, manual secret and contribution provenance review", "prohibited_shortcut": "Static scan and import author identity do not prove safety or ownership"},
+    {"id": "bundled-native-crash", "status": "root_cause_unresolved", "evidence": "docs/RUNTIME_DIAGNOSTICS_20261020.md", "required": "Native dump with matching symbols or a sufficiently small reproducible case; both observed runtime binaries have valid signatures", "prohibited_shortcut": "Do not call an older interpreter comparison a production fix"},
+    {"id": "clean-windows-installer", "status": "blocked_no_test_environment", "evidence": "User confirmed none available; docs/CLEAN_WINDOWS_ACCEPTANCE.md and acceptance/RESULTS.template.json", "required": "Clean Windows computer or VM and reviewed actual installer plus complete binary notices; source ZIP is not EXE"},
+    {"id": "private-history-artwork", "status": "requires_separate_history_decision_before_publication", "evidence": "Old private commits retain role images; no rewrite/deletion authorized"},
+    {"id": "public-release", "status": "not_authorized", "evidence": "Repository must remain private; no public release or visibility change performed"}
+  ],
+  "production_deployed": false,
+  "formal_factor_acceptance_claimed": false,
+  "all_items_completed": false
+}

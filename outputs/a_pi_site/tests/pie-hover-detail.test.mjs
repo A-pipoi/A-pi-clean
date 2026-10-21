@@ -1,0 +1,31 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {JSDOM} from 'jsdom';
+import {installPieHoverDetail} from '../dist/pie-hover-detail.mjs';
+
+test('pie hover shows complete values outside the ring and supports click/keyboard without HTML injection',()=>{
+ const dom=new JSDOM('<html lang="zh-CN"><div id="ring"><strong>40.5%</strong></div><details>数据</details></html>');
+ globalThis.document=dom.window.document;
+ const events=new Map();
+ const chart={off:event=>events.delete(event),on:(event,handler)=>events.set(event,handler)};
+ const anchor=document.getElementById('ring');
+ const segments=[{name:'<img src=x onerror=alert(1)>',value:599761.52},{name:'股票',value:407701.89}];
+ const box=installPieHoverDetail(anchor,chart,segments);
+ assert.equal(anchor.nextElementSibling,box);
+ assert.equal(anchor.contains(box),false);
+ events.get('mouseover')({dataIndex:0});
+ assert.match(box.textContent,/599,761\.52/);
+ assert.match(box.textContent,/59\.5%/);
+ assert.equal(box.querySelector('img'),null);
+ assert.equal(anchor.textContent,'40.5%');
+ events.get('globalout')();assert.equal(box.dataset.active,'false');
+ events.get('click')({dataIndex:1});events.get('globalout')();assert.equal(box.dataset.active,'true');
+ box.dispatchEvent(new dom.window.KeyboardEvent('keydown',{key:'ArrowRight'}));
+ assert.match(box.textContent,/599,761\.52/);
+ box.dispatchEvent(new dom.window.KeyboardEvent('keydown',{key:'Escape'}));
+ assert.equal(box.dataset.active,'false');
+ installPieHoverDetail(anchor,chart,[{name:'更新',value:2}]);
+ assert.equal(document.querySelectorAll('.pie-hover-detail').length,1);
+ events.get('mouseover')({dataIndex:0});assert.match(document.querySelector('.pie-hover-detail').textContent,/100\.0%/);
+ dom.window.close();
+});

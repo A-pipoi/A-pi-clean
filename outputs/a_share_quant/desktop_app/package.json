@@ -1,0 +1,45 @@
+{
+  "name": "a-pi-quant-workbench-desktop",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Windows desktop client for the A-pi Quant Workbench",
+  "main": "main.cjs",
+  "scripts": {
+    "start": "electron .",
+    "typecheck": "node ../../a_pi_site/node_modules/typescript/bin/tsc --noEmit --project tsconfig.json",
+    "build:win": "electron-builder --win --dir && node verify-build.cjs"
+  },
+  "devDependencies": {
+    "electron": "44.4.5",
+    "electron-builder": "26.15.3"
+  },
+  "overrides": {
+    "http-cache-semantics": "4.3.0",
+    "global-agent": "4.1.3"
+  },
+  "build": {
+    "appId": "com.api.quantworkbench",
+    "productName": "A-pi 量化工作台",
+    "directories": {
+      "output": "dist"
+    },
+    "electronDist": "node_modules/electron/dist",
+    "files": [
+      "main.cjs",
+      "modules/**/*.cjs",
+      "package.json",
+      "assets/**/*"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "dir",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "executableName": "A-pi 量化工作台"
+    }
+  }
+}

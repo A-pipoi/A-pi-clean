@@ -1,0 +1,222 @@
+[
+  {
+    "ecosystem": "npm",
+    "scope": "outputs/a_share_quant/desktop_app",
+    "package": "@electron-internal/extract-zip",
+    "version": "1.0.5",
+    "license": "BSD-2-Clause",
+    "optional": false,
+    "development": true,
+    "installed": true,
+    "source": "outputs/a_share_quant/desktop_app/package-lock.json#node_modules/@electron-internal/extract-zip",
+    "notices": []
+  },
+  {
+    "ecosystem": "npm",
+    "scope": "outputs/a_share_quant/desktop_app",
+    "package": "chromium-pickle-js",
+    "version": "0.2.0",
+    "license": "MIT",
+    "optional": false,
+    "development": true,
+    "installed": true,
+    "source": "outputs/a_share_quant/desktop_app/package-lock.json#node_modules/chromium-pickle-js",
+    "notices": []
+  },
+  {
+    "ecosystem": "npm",
+    "scope": "outputs/a_share_quant/desktop_app",
+    "package": "compare-version",
+    "version": "0.1.2",
+    "license": "MIT",
+    "optional": false,
+    "development": true,
+    "installed": true,
+    "source": "outputs/a_share_quant/desktop_app/package-lock.json#node_modules/compare-version",
+    "notices": []
+  },
+  {
+    "ecosystem": "npm",
+    "scope": "outputs/a_share_quant/desktop_app",
+    "package": "cross-dirname",
+    "version": "0.1.0",
+    "license": "MIT",
+    "optional": true,
+    "development": true,
+    "installed": true,
+    "source": "outputs/a_share_quant/desktop_app/package-lock.json#node_modules/cross-dirname",
+    "notices": []
+  },
+  {
+    "ecosystem": "npm",
+    "scope": "outputs/a_share_quant/desktop_app",
+    "package": "err-code",
+    "version": "2.0.3",
+    "license": "MIT",
+    "optional": false,
+    "development": true,
+    "installed": true,
+    "source": "outputs/a_share_quant/desktop_app/package-lock.json#node_modules/err-code",
+    "notices": []
+  },
+  {
+    "ecosystem": "npm",
+    "scope": "outputs/a_share_quant/desktop_app",
+    "package": "filelist",
+    "version": "1.0.6",
+    "license": "Apache-2.0",
+    "optional": false,
+    "development": true,
+    "installed": true,
+    "source": "outputs/a_share_quant/desktop_app/package-lock.json#node_modules/filelist",
+    "notices": []
+  },
+  {
+    "ecosystem": "npm",
+    "scope": "outputs/a_share_quant/desktop_app",
+    "package": "jake",
+    "version": "10.9.4",
+    "license": "Apache-2.0",
+    "optional": false,
+    "development": true,
+    "installed": true,
+    "source": "outputs/a_share_quant/desktop_app/package-lock.json#node_modules/jake",
+    "notices": []
+  },
+  {
+    "ecosystem": "npm",
+    "scope": "outputs/a_share_quant/desktop_app",
+    "package": "keyv",
+    "version": "4.5.4",
+    "license": "MIT",
+    "optional": false,
+    "development": true,
+    "installed": true,
+    "source": "outputs/a_share_quant/desktop_app/package-lock.json#node_modules/keyv",
+    "notices": []
+  },
+  {
+    "ecosystem": "npm",
+    "scope": "outputs/a_share_quant/desktop_app",
+    "package": "lazy-val",
+    "version": "1.0.5",
+    "license": "MIT",
+    "optional": false,
+    "development": true,
+    "installed": true,
+    "source": "outputs/a_share_quant/desktop_app/package-lock.json#node_modules/lazy-val",
+    "notices": []
+  },
+  {
+    "ecosystem": "npm",
+    "scope": "outputs/a_share_quant/desktop_app",
+    "package": "node-api-version",
+    "version": "0.2.1",
+    "license": "MIT",
+    "optional": false,
+    "development": true,
+    "installed": true,
+    "source": "outputs/a_share_quant/desktop_app/package-lock.json#node_modules/node-api-version",
+    "notices": []
+  },
+  {
+    "ecosystem": "npm",
+    "scope": "outputs/a_share_quant/desktop_app",
+    "package": "read-binary-file-arch",
+    "version": "1.0.6",
+    "license": "MIT",
+    "optional": false,
+    "development": true,
+    "installed": true,
+    "source": "outputs/a_share_quant/desktop_app/package-lock.json#node_modules/read-binary-file-arch",
+    "notices": []
+  },
+  {
+    "ecosystem": "npm",
+    "scope": "outputs/a_share_quant/desktop_app",
+    "package": "temp-file",
+    "version": "3.4.0",
+    "license": "MIT",
+    "optional": false,
+    "development": true,
+    "installed": true,
+    "source": "outputs/a_share_quant/desktop_app/package-lock.json#node_modules/temp-file",
+    "notices": []
+  },
+  {
+    "ecosystem": "npm",
+    "scope": "outputs/a_share_quant/desktop_app",
+    "package": "tmp-promise",
+    "version": "3.0.3",
+    "license": "MIT",
+    "optional": false,
+    "development": true,
+    "installed": true,
+    "source": "outputs/a_share_quant/desktop_app/package-lock.json#node_modules/tmp-promise",
+    "notices": []
+  },
+  {
+    "ecosystem": "npm",
+    "scope": "outputs/a_share_quant/desktop_app",
+    "package": "truncate-utf8-bytes",
+    "version": "1.0.2",
+    "license": "WTFPL",
+    "optional": false,
+    "development": true,
+    "installed": true,
+    "source": "outputs/a_share_quant/desktop_app/package-lock.json#node_modules/truncate-utf8-bytes",
+    "notices": []
+  },
+  {
+    "ecosystem": "python",
+    "scope": "declared-but-not-installed",
+    "package": "akshare",
+    "version": "not verified",
+    "declared_requirement": [
+      "akshare>=1.18.0"
+    ],
+    "license": "NOT_VERIFIED",
+    "notices": []
+  },
+  {
+    "ecosystem": "python",
+    "scope": "declared-but-not-installed",
+    "package": "redis",
+    "version": "not verified",
+    "declared_requirement": [
+      "redis==8.1.0",
+      "redis>=5,<7"
+    ],
+    "license": "MIT",
+    "notices": [
+      {
+        "file": "notices/a57b250a5bf03d7afe55b74063313f2adb7b00d546c0ab149a89398333fe3cc8.txt",
+        "original_filename": "LICENSE",
+        "source_sha256": "a57b250a5bf03d7afe55b74063313f2adb7b00d546c0ab149a89398333fe3cc8",
+        "source_url": "https://files.pythonhosted.org/packages/66/9d/c5731f6e3608663d4d3656fd8d3aecee8b509c3082818f5a13eae925baea/redis-8.1.0-py3-none-any.whl",
+        "archive_member": "redis-8.1.0.dist-info/licenses/LICENSE",
+        "archive_sha256": "a4fe1aac3d3b3cc791d4b3d5931c5a956045dc951ee74d1c913ee3ac4d2ee9fb",
+        "metadata_url": "https://pypi.org/pypi/redis/8.1.0/json"
+      }
+    ],
+    "artifact_version": "8.1.0",
+    "notice_evidence_method": "PyPI version identity and wheel SHA256 verified; wheel read without installation",
+    "evidence_source": "https://pypi.org/pypi/redis/8.1.0/json",
+    "artifact_filename": "redis-8.1.0-py3-none-any.whl",
+    "unresolved_constraints": [
+      "redis>=5,<7"
+    ],
+    "installed": false
+  },
+  {
+    "ecosystem": "python",
+    "scope": "declared-but-not-installed",
+    "package": "rq",
+    "version": "not verified",
+    "declared_requirement": [
+      "rq>=2,<3"
+    ],
+    "license": "NOT_VERIFIED",
+    "notices": []
+  }
+]

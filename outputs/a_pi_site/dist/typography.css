@@ -1,0 +1,439 @@
+/* Shared type roles: local fonts work offline in the desktop client. */
+/* All roles share the local UI family; weight and size carry the hierarchy. */
+html,
+code,
+pre,
+kbd,
+samp,
+summary {
+  font-family: var(--font-ui);
+}
+.side-account-hero strong,
+.health-score strong,
+.research-stat strong,
+.result-hero strong,
+.run-date,
+table td,
+.chart-y-axis-title,
+.chart-x-axis-title,
+.chart-wrap canvas,
+.mini-chart-wrap canvas {
+  font-family: var(--font-num);
+  font-variant-numeric: lining-nums tabular-nums;
+}
+.chart-wrap canvas,
+.mini-chart-wrap canvas {
+  font-size: var(--text-xs);
+}
+.panel-heading h2,
+.side-heading h2,
+.config-panel > h2 {
+  font-size: var(--text-md);
+}
+.panel-kicker,
+.overline,
+.eyebrow,
+.auth-card-kicker,
+.auth-overline {
+  font-size: var(--text-sm);
+  letter-spacing: var(--tracking-caps);
+  color: var(--faint);
+}
+.feature-store-panel {
+  margin-top: var(--space-3);
+  padding: var(--space-4) var(--space-5);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--panel);
+}
+.feature-store-panel__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+.feature-store-panel h3 {
+  margin: 0;
+  color: var(--text);
+  font-size: var(--text-md);
+  font-weight: var(--weight-bold);
+}
+.feature-store-panel__state,
+.feature-store-panel__description,
+.feature-store-panel__message {
+  color: var(--muted);
+  font-size: var(--text-sm);
+  line-height: var(--leading-normal);
+}
+.feature-store-panel__description {
+  margin: var(--space-2) 0 var(--space-3);
+}
+.feature-store-panel__footer {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+.feature-store-panel__button {
+  min-height: 44px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel2);
+  color: var(--purple);
+  padding: var(--space-2) var(--space-4);
+  font: inherit;
+  font-size: var(--text-base);
+  font-weight: var(--weight-bold);
+  cursor: pointer;
+}
+.feature-store-panel__button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+.feature-store-panel__message[data-state="error"] {
+  color: var(--red);
+}
+.data-extension-panel {
+  margin-top: var(--space-4);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--line);
+}
+.data-extension-panel h4 {
+  margin: 0 0 var(--space-2);
+  font-size: var(--text-base);
+}
+.data-extension-panel p {
+  color: var(--muted);
+  line-height: var(--leading-normal);
+  overflow-wrap: anywhere;
+}
+.data-extension-panel details {
+  margin-top: var(--space-3);
+}
+.data-extension-panel summary {
+  cursor: pointer;
+}
+.data-extension-panel__table {
+  overflow-x: auto;
+  margin-top: var(--space-2);
+}
+
+body {
+  font-variant-numeric: lining-nums tabular-nums;
+  font-family: var(--font-ui);
+  font-size: var(--type-body);
+  font-weight: var(--weight-normal);
+  line-height: var(--leading-normal);
+  letter-spacing: normal;
+}
+button,
+input,
+select,
+textarea {
+  font-family: var(--font-ui);
+}
+input,
+select,
+textarea {
+  line-height: var(--leading-normal);
+}
+.page-heading h1,
+.welcome-heading h1 {
+  font-size: var(--text-lg);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-tight);
+  letter-spacing: normal;
+  text-wrap: balance;
+}
+.panel-heading h2,
+.factor-mining-heading h2 {
+  font-size: var(--text-md);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-normal);
+  letter-spacing: normal;
+}
+.page-heading p,
+.welcome-heading p,
+.factor-mining-heading p,
+.config-note,
+.archive-actions-note,
+.optimizer-panel .panel-heading p {
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+}
+.eyebrow,
+.overline,
+.panel-kicker,
+.brand-subtitle,
+.auth-card-kicker,
+.auth-overline,
+.metric-label {
+  letter-spacing: var(--tracking-caps);
+}
+.brand-name,
+.auth-brand {
+  letter-spacing: normal;
+}
+.nav-item,
+.workspace-switcher,
+.user-chip {
+  font-size: var(--text-base);
+}
+.primary-button,
+.secondary-button {
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+}
+.panel th {
+  font-size: var(--type-meta);
+  line-height: var(--leading-normal);
+  font-weight: var(--weight-normal);
+}
+.panel td,
+.panel td strong {
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+}
+.metric-value,
+.donut-center strong,
+.paper-kpi strong,
+.result-hero strong,
+.health-score strong {
+  letter-spacing: normal;
+}
+.metric-value,
+.paper-kpi strong {
+  font-size: var(--text-xl);
+  line-height: var(--leading-tight);
+}
+.metric-foot {
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-3);
+}
+.metric-top {
+  align-items: flex-start;
+  gap: var(--space-2);
+}
+.metric-value,
+.paper-kpi strong,
+.panel td,
+.tape-item strong,
+.tape-item .datum-note,
+.allocation-list strong,
+.axis-labels,
+.chart-last,
+.chart-tooltip strong,
+.market-ticker-item strong,
+.risk-analytics-metrics dd {
+  font-family: var(--font-num);
+  font-variant-numeric: lining-nums tabular-nums;
+}
+.auth-pitch h1 {
+  font-size: var(--text-display);
+  line-height: var(--leading-tight);
+  letter-spacing: normal;
+  text-wrap: balance;
+}
+.auth-card h2 {
+  font-size: var(--text-lg);
+  line-height: var(--leading-normal);
+  letter-spacing: normal;
+}
+.auth-pitch .auth-tagline {
+  letter-spacing: normal;
+}
+.auth-muted,
+.auth-options,
+.auth-card-footer {
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+}
+.auth-hint {
+  line-height: var(--leading-normal);
+}
+.auth-options,
+.auth-card-footer {
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+.auth-card-footer .language-control {
+  flex-wrap: wrap;
+}
+/* Inputs stay comfortably legible; code keeps a genuinely monospace face. */
+.config-panel input,
+.config-panel select,
+.top-search input,
+.factor-registration-form input,
+.factor-registration-form select,
+.index-universe-row input,
+.index-universe-row select {
+  font-family: var(--font-ui);
+  font-size: var(--text-base);
+}
+code,
+pre,
+kbd,
+.security-secrets pre,
+.orders-panel code,
+.utility-copy code,
+.factor-mining-row code,
+#factorExpressionInput {
+  font-family: var(--font-code);
+  font-size: var(--type-meta);
+  line-height: var(--leading-normal);
+  letter-spacing: normal;
+}
+.feature-store-panel__state,
+.feature-store-panel__description,
+.feature-store-panel__button,
+.feature-store-panel__message {
+  font-size: var(--type-meta);
+}
+.experiment-comparison-chart text {
+  font-family: var(--font-ui);
+  font-size: var(--text-sm);
+}
+.backtest-fold-control {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-block: var(--space-3);
+  font-size: var(--text-base);
+}
+.backtest-fold-control select {
+  min-width: 0;
+  max-width: 100%;
+  min-height: 40px;
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--text);
+  background: var(--panel);
+  font: inherit;
+}
+.backtest-chart-legend {
+  margin-block: var(--space-2) var(--space-3);
+  font-size: var(--type-meta);
+  color: var(--muted);
+  line-height: var(--leading-normal);
+  overflow-wrap: anywhere;
+}
+@media (max-width: 720px) {
+  .page-heading h1,
+  .welcome-heading h1 {
+    font-size: var(--text-lg);
+  }
+  .auth-pitch h1 {
+    font-size: var(--text-display);
+  }
+  .auth-field input,
+  .config-panel input,
+  .config-panel select,
+  .factor-registration-form input,
+  .factor-registration-form select,
+  .top-search input {
+    font-size: var(--text-md);
+  }
+}
+.paper-kpi:last-child strong {
+  font-family: var(--font-ui);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+}
+/* Semantic numeric cells: alignment is independent of the surrounding UI text. */
+table th.num,
+table td.num {
+  text-align: right;
+  white-space: nowrap;
+  font-family: var(--font-num);
+  font-variant-numeric: lining-nums tabular-nums;
+}
+.data-extension-panel__series {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-6);
+}
+.data-extension-panel__series > div { min-width: 0; }
+.data-extension-panel__series > details { grid-column: 1 / -1; min-width: 0; }
+.data-extension-panel__series h5 { font-size: var(--text-base); margin: var(--space-3) 0; line-height: var(--leading-normal); }
+.data-extension-panel__table { max-width: 100%; }
+@media (max-width: 720px) {
+  .data-extension-panel__series { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* design-system body floor */
+.app-shell p,
+.app-shell li,
+.app-shell td,
+.app-shell th,
+.app-shell label,
+.app-shell .datum-note {
+  font-size: max(0.875rem, 1em);
+}
+.app-shell .page-heading h1,
+.app-shell .welcome-heading h1 {
+  font-size: var(--text-lg);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-page);
+}
+.app-shell .panel-heading h2,
+.app-shell .side-heading h2,
+.app-shell .config-panel > h2 {
+  font-size: var(--text-md);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-panel);
+}
+
+/* design-system 6-level type scale */
+.app-shell .metric-value,
+.app-shell .side-account-hero strong,
+.app-shell .result-hero strong {
+  font-size: var(--text-xl);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-heading);
+  font-variant-numeric: tabular-nums;
+}
+.app-shell .page-heading h1,
+.app-shell .welcome-heading h1 {
+  font-size: var(--text-lg);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-page);
+}
+.app-shell .panel-heading h2,
+.app-shell .side-heading h2,
+.app-shell .config-panel > h2,
+.app-shell .workbench-tab {
+  font-size: var(--text-md);
+  font-weight: var(--weight-semibold);
+  line-height: var(--leading-panel);
+}
+.app-shell,
+.app-shell .page-section,
+.app-shell td,
+.app-shell input,
+.app-shell select,
+.app-shell textarea {
+  font-size: var(--text-base);
+  line-height: var(--leading-body);
+}
+.app-shell label,
+.app-shell th,
+.app-shell .primary-button,
+.app-shell .secondary-button,
+.app-shell .danger-button,
+.app-shell .filter-button {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  line-height: var(--leading-panel);
+}
+.app-shell .datum-note,
+.app-shell .metric-foot,
+.app-shell .panel-kicker,
+.app-shell .overline,
+.app-shell .nav-group-label,
+.app-shell .ia-tab-hint {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-normal);
+  line-height: var(--leading-caption);
+}

@@ -1,0 +1,25 @@
+{
+  "status": "not_executed",
+  "tested_at": null,
+  "tester": null,
+  "windows_build": null,
+  "clean_machine_or_vm": null,
+  "source_commit": null,
+  "package_sha256": null,
+  "runtime_version": null,
+  "checks": {
+    "archive_integrity": "pending",
+    "installation_with_spaces_and_unicode": "pending",
+    "loopback_https_unique_certificate": "pending",
+    "first_account_no_default_password": "pending",
+    "login_and_no_data_state": "pending",
+    "themes_navigation_notifications": "pending",
+    "quit_and_restart_no_orphans": "pending",
+    "research_account_isolation": "pending",
+    "uninstall_preserves_external_data": "pending"
+  },
+  "evidence_paths": [],
+  "failure_details": [],
+  "formal_factor_acceptance": false,
+  "public_release_approved": false
+}

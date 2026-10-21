@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "a-share-quant"
+version = "0.1.0"
+description = "Point-in-time aware A-share research and event-driven backtesting system"
+requires-python = ">=3.11"
+dependencies = ["tzdata>=2024.1"]
+
+[project.optional-dependencies]
+akshare = ["akshare>=1.18.0"]
+ml = ["numpy>=1.26,<3", "lightgbm>=4.3,<5"]
+redis-queue = ["redis>=5,<7", "rq>=2,<3"]
+dev = ["build>=1.2,<2", "mypy>=1.15,<2", "pytest>=9.0.3,<10", "requests>=2.31,<3", "types-PyYAML>=6.0.12", "ruff>=0.11,<1"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["quant*"]
+
+[tool.setuptools.package-data]
+quant = ["resources/*.md"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
+addopts = "-ra"
+
+[tool.mypy]
+python_version = "3.14"
+files = ["quant"]
+ignore_missing_imports = true
+no_implicit_optional = true
+
+[[tool.mypy.overrides]]
+module = ["quant.api.*"]
+disallow_untyped_defs = true

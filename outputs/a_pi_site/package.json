@@ -1,0 +1,25 @@
+{
+  "name": "a-pi-workbench-web",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "check:syntax": "node scripts/check-syntax.mjs",
+    "typecheck": "node scripts/generate-dom-types.mjs && tsc --noEmit --project tsconfig.json",
+    "test": "node --test",
+    "format": "prettier --write \"dist/*.{js,mjs}\" \"types/*.d.ts\"",
+    "check:format": "prettier --check \"dist/*.{js,mjs}\" \"types/*.d.ts\"",
+    "verify": "npm run build && npm run typecheck && npm run check:syntax && npm run check:format && npm test"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.0",
+    "jsdom": "30.1.2",
+    "prettier": "^3.9.9",
+    "typescript": "^5.8.0"
+  },
+  "dependencies": {
+    "dompurify": "3.4.16",
+    "echarts": "6.1.0"
+  }
+}

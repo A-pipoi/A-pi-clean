@@ -1,0 +1,182 @@
+.account-security {
+  width: min(900px, calc(100% - 32px));
+  max-height: calc(100dvh - 32px);
+  overflow: auto;
+  padding: var(--space-6);
+  color: var(--text);
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  font: inherit;
+}
+.account-security::backdrop {
+  background: color-mix(in srgb, var(--text) 35%, transparent);
+}
+.account-security header,
+.security-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+.account-security h2 {
+  margin: 0;
+  font-size: var(--text-lg);
+}
+.account-security h3 {
+  margin: 0 0 var(--space-4);
+  font-size: var(--text-md);
+}
+.account-security h4 {
+  margin: 0 0 var(--space-3);
+  overflow-wrap: anywhere;
+}
+.security-inline-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: var(--space-3) var(--space-4);
+}
+.security-inline-actions > button {
+  flex: 0 0 auto;
+  max-width: 100%;
+}
+.security-factor-status {
+  margin: 0;
+  line-height: var(--leading-normal);
+}
+.security-factor-actions > button:disabled {
+  cursor: not-allowed;
+}
+.paper-order-dialog .paper-order-summary:empty,
+.paper-order-dialog .security-error:empty {
+  display: none;
+}
+.account-security section {
+  padding: var(--space-6) 0;
+  border-top: 1px solid var(--line);
+}
+.account-security button {
+  min-height: 44px;
+  min-width: 44px;
+  padding: var(--space-3) var(--space-4);
+  white-space: normal;
+  line-height: var(--leading-normal);
+}
+.account-security button:hover {
+  filter: brightness(0.96);
+}
+.account-security button:active {
+  filter: brightness(0.9);
+}
+.account-security button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+.account-security :focus-visible,
+#authOtp:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 3px;
+}
+.account-security-action {
+  width: min(480px, calc(100% - 32px));
+}
+.account-security form {
+  display: grid;
+  gap: var(--space-3);
+}
+.account-security label {
+  margin-top: var(--space-3);
+  font-weight: var(--weight-bold);
+}
+.account-security input,
+.account-security select {
+  min-width: 0;
+  width: 100%;
+  min-height: 44px;
+  padding: var(--space-3);
+  color: var(--text);
+  background: var(--panel2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  caret-color: var(--text);
+}
+.account-security p {
+  max-width: 70ch;
+  overflow-wrap: anywhere;
+}
+.security-error {
+  color: var(--red);
+}
+.security-session {
+  padding: var(--space-4) 0;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: var(--space-4);
+}
+.security-session dl {
+  display: grid;
+  grid-template-columns: 140px minmax(0, 1fr);
+  gap: var(--space-2) var(--space-4);
+}
+.security-session dt {
+  color: var(--muted);
+}
+.security-session dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.security-secrets pre {
+  padding: var(--space-4);
+  background: var(--panel2);
+  border: 1px solid var(--line);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  user-select: text;
+}
+.security-table-scroll {
+  overflow-x: auto;
+  margin-top: var(--space-4);
+}
+.account-security table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.account-security caption {
+  text-align: left;
+  font-weight: var(--weight-bold);
+  padding-bottom: var(--space-3);
+}
+.account-security th,
+.account-security td {
+  text-align: center;
+  padding: var(--space-3);
+  border-bottom: 1px solid var(--line);
+  vertical-align: middle;
+  overflow-wrap: anywhere;
+}
+.account-security td button {
+  margin: var(--space-1);
+}
+#authSubmit {
+  min-height: 44px;
+}
+@media (max-width: 600px) {
+  .account-security {
+    padding: var(--space-4);
+  }
+  .security-session dl {
+    grid-template-columns: 1fr;
+    gap: var(--space-1);
+  }
+  .security-session dd {
+    margin-bottom: var(--space-3);
+  }
+  .security-actions {
+    align-items: stretch;
+  }
+  .security-actions button {
+    flex: 1;
+  }
+}

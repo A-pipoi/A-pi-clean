@@ -1,0 +1,9 @@
+include README.md pyproject.toml
+graft quant
+graft examples
+graft tests
+prune desktop_app
+prune data
+prune data_cache
+prune .venv
+global-exclude *.py[cod]

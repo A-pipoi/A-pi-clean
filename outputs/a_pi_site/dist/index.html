@@ -1,0 +1,538 @@
+<!doctype html>
+<html lang="zh-CN" data-splash-enabled>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#ffffff" />
+    <meta name="description" content="A-pi：面向 A 股研究、回测、风控与纸面交易的量化工作台。" />
+    <title>A-pi · A股量化工作台</title>
+    <script src="startup.js"></script>
+    <link rel="icon" type="image/svg+xml" href="a-pi-mark.svg" />
+    <link rel="stylesheet" href="design-tokens.css" />
+    <link rel="stylesheet" href="styles.css?v=20260929-research-topn-2" />
+    <link rel="stylesheet" href="account-security.css?v=20261007-inline-actions-1" />
+    <link rel="stylesheet" href="typography.css?v=20261007-yahei-1" />
+    <link rel="stylesheet" href="theme.css" />
+    <link rel="stylesheet" href="workbench-layers.css" />
+    <link rel="stylesheet" href="reference-theme.css" />
+    <link rel="stylesheet" href="workbench-usability.css" />
+  </head>
+  <body>
+    <section class="desktop-splash" id="desktopSplash" aria-label="A-pi 量化工作台开屏">
+      <div class="desktop-splash-card">
+        <img class="desktop-splash-mascot" src="a-pi-mark.svg" alt="A-pi 几何标记" />
+        <h1>A-pi 量化工作台</h1>
+        <p>让每一次研究都有迹可循</p>
+      </div>
+      <button class="desktop-splash-skip" id="desktopSplashSkip" type="button">跳过</button>
+    </section>
+    <section class="auth-screen" id="authView" aria-label="A-pi 本机访问">
+      <div class="auth-grid-glow"></div>
+      <div class="auth-pitch">
+        <div class="auth-brand"><img class="brand-mark brand-icon" src="a-pi-mark.svg" alt="" width="34" height="34" decoding="async" /><span>A-pi</span></div>
+        <h1>量化工作台</h1>
+        <p class="auth-tagline">让每一次研究都有迹可循</p>
+      </div>
+      <div class="auth-card">
+        <h2 id="authTitle">登录 A-pi</h2>
+          <p id="authDescription" class="auth-description" data-locale-skip hidden></p>
+        
+        <form id="authForm">
+          <label class="auth-field" for="authUsername"><span>用户名</span><input id="authUsername" name="username" autocomplete="username" autocapitalize="none" spellcheck="false" required minlength="3" maxlength="32" pattern="[a-z0-9_\-]{3,32}" aria-describedby="authUsernameHint" /></label>
+          <p class="auth-hint" id="authUsernameHint">3–32 位小写字母、数字、下划线或连字符</p>
+          <label class="auth-field" for="authPassword"><span>密码</span><span class="password-reveal-control"><input id="authPassword" name="password" type="password" autocomplete="current-password" required minlength="10" maxlength="1024" /><button class="password-reveal-button" type="button" data-password-toggle="authPassword" aria-label="显示密码" title="显示密码" aria-pressed="false"><svg class="password-eye-show" viewBox="0 0 24 24" aria-hidden="true" focusable="false" hidden><path d="M2.5 12s3.4-6 9.5-6 9.5 6 9.5 6-3.4 6-9.5 6-9.5-6-9.5-6Z"/><circle cx="12" cy="12" r="2.7"/></svg><svg class="password-eye-hide" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="m3 3 18 18M10.6 6.2A10.8 10.8 0 0 1 12 6c6.1 0 9.5 6 9.5 6a16.4 16.4 0 0 1-3 3.6M6.2 6.2C3.8 7.8 2.5 12 2.5 12s3.4 6 9.5 6c1.2 0 2.3-.2 3.3-.6"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></svg></button></span></label>
+          <label class="auth-field" for="authOtp" data-locale-skip><span id="authOtpLabel">验证码或恢复码（可选）</span><input id="authOtp" name="otp" type="text" autocomplete="one-time-code" autocapitalize="none" spellcheck="false" aria-describedby="authOtpHint" /></label>
+          <p class="auth-hint" id="authOtpHint" data-locale-skip hidden></p>
+          <p id="authError" class="auth-error" role="alert" aria-live="polite" hidden></p>
+        <div class="auth-options"><label><input id="rememberSession" type="checkbox" checked aria-describedby="rememberHint" /> <span>记住此设备 7 天（仅可信设备）</span></label><a href="#" id="helpLink">访问帮助</a></div>
+        <p id="rememberHint" class="auth-hint">仅可信设备</p>
+        <button class="primary-button full auth-submit" id="authSubmit" type="submit">登录</button></form>
+        <form id="registerForm" hidden data-slot="registration-form" data-locale-skip>
+          <label class="auth-field" for="registerUsername"><span data-registration-text="username">用户名</span><input id="registerUsername" name="username" autocomplete="username" autocapitalize="none" spellcheck="false" required minlength="3" maxlength="32" pattern="[a-z0-9_\-]{3,32}" aria-describedby="registerUsernameHint" /></label>
+          <p class="auth-hint" id="registerUsernameHint" data-registration-text="usernameHint">3–32 位小写字母、数字、下划线或连字符</p>
+          <label class="auth-field" for="registerPassword"><span data-registration-text="password">密码</span><input id="registerPassword" name="password" type="password" autocomplete="new-password" required minlength="10" maxlength="1024" aria-describedby="registerPasswordHint" /></label>
+          <p class="auth-hint" id="registerPasswordHint" data-registration-text="passwordHint">10–1024 个字符，请使用独特的长密码。</p>
+          <label class="auth-field" for="registerInvite"><span data-registration-text="invite">邀请码</span><input id="registerInvite" name="invite_code" type="text" autocomplete="off" autocapitalize="none" spellcheck="false" required minlength="16" maxlength="16" pattern="[0-9a-fA-F]{16}" aria-describedby="registerInviteHint" /></label>
+          <p class="auth-hint" id="registerInviteHint" data-registration-text="inviteHint">由管理员提供，7 天内有效，每码仅可使用一次。</p>
+          <p id="registerError" class="auth-error" role="alert" aria-live="polite" hidden></p>
+          <button id="registerSubmit" class="primary-button full auth-submit" type="submit" data-registration-text="submit">注册研究员账号</button>
+        </form>
+        <p id="registerSuccess" class="auth-hint" role="status" aria-live="polite" hidden data-locale-skip></p>
+        <button id="registerToggle" type="button" class="auth-register-toggle" aria-controls="registerForm" aria-expanded="false" data-locale-skip>使用邀请码注册</button>
+          <div class="auth-card-footer"><label class="language-control"><span class="language-label">语言</span><select id="languageSelect" aria-label="切换语言"><option value="zh-CN">简体中文</option><option value="en-US">English</option><option value="fr-FR">Français</option><option value="ja-JP">日本語</option></select></label></div>
+      </div>
+    </section>
+
+    <div class="app-shell" id="appShell">
+      <aside class="sidebar">
+        <div class="brand-lockup">
+          <img class="brand-mark brand-icon" src="a-pi-mark.svg" alt="" width="34" height="34" decoding="async" />
+          <div>
+            <div class="brand-name">A-pi</div>
+            <div class="brand-subtitle">QUANT WORKSPACE</div>
+          </div>
+        </div>
+
+        <div class="workspace-selector" hidden>
+          <button class="workspace-switcher" id="workspaceSwitcher" type="button" disabled aria-label="当前工作区" aria-haspopup="listbox" aria-expanded="false" aria-controls="workspaceMenu">
+            <span class="status-dot" id="workspaceStatusDot"></span>
+            <span id="workspaceName">研究工作区</span>
+            <span class="workspace-chevron" aria-hidden="true"></span>
+          </button>
+          <div class="workspace-menu" id="workspaceMenu" hidden>
+            <div class="workspace-menu-heading"><strong>工作区</strong><span>服务接口</span></div>
+            <div class="workspace-menu-list" id="workspaceMenuList" role="listbox" aria-label="工作区列表"></div>
+          </div>
+        </div>
+
+        <nav class="nav-list" aria-label="主导航">
+          <button class="nav-item active" data-section="overview" aria-label="组合总览" title="组合总览"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"></rect><rect x="14" y="3" width="7" height="7" rx="1.5"></rect><rect x="3" y="14" width="7" height="7" rx="1.5"></rect><rect x="14" y="14" width="7" height="7" rx="1.5"></rect></svg></span><span class="nav-label">组合总览</span></button>
+          <button class="nav-item" data-section="research" aria-label="因子研究" title="因子研究"><span class="nav-icon" aria-hidden="true">⌁</span><span class="nav-label">因子研究</span></button>
+          <button class="nav-item" data-section="factorMining" aria-label="因子挖掘" title="因子挖掘"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2"></circle><circle cx="18" cy="6" r="2"></circle><circle cx="12" cy="18" r="2"></circle><path d="M8 6h8M7.5 7.8l3.2 8M16.5 7.8l-3.2 8"></path></svg></span><span class="nav-label">因子挖掘</span></button>
+          <button class="nav-item" data-section="backtest" aria-label="回测实验" title="回测实验"><span class="nav-icon" aria-hidden="true">↗</span><span class="nav-label">回测实验</span></button>
+          <button class="nav-item" data-section="risk" aria-label="风险控制" title="风险控制"><span class="nav-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11Z"></path></svg></span><span class="nav-label">风险控制</span><span class="nav-badge" id="riskNavBadge" aria-hidden="true" hidden>0</span></button>
+          <button class="nav-item" data-section="paper" aria-label="纸面交易" title="纸面交易"><span class="nav-icon" aria-hidden="true">▣</span><span class="nav-label">纸面交易</span></button>
+        </nav>
+
+        <div class="sidebar-spacer"></div>
+        <div class="data-health">
+          <div class="eyebrow">数据健康度</div>
+          <div class="health-score"><strong id="dataHealthStatus">—</strong><span id="dataHealthMeta">等待数据</span></div>
+          <div class="health-bar"><span id="dataHealthBar"></span></div>
+          <div class="health-meta"><span id="dataHealthLabel">等待 Tushare 数据</span><span id="dataHealthUpdated">—</span></div>
+        </div>
+        <div class="sidebar-footer">
+          <button class="mini-link" id="helpButton" type="button"><span>?</span> 使用说明</button>
+          <a id="manualGuideLink" href="help.html" hidden>完整使用与运维说明书</a>
+          <button class="mini-link logout-link" id="logoutButton"><span>↗</span> 退出</button>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <header class="topbar">
+          <section class="market-ticker" id="marketTicker" aria-label="主要指数实时行情" aria-live="off" data-state="loading">
+            <div class="market-ticker-label"><span class="market-ticker-dot" aria-hidden="true"></span><span id="marketTickerStatus">行情连接中</span></div>
+            <div class="market-ticker-window"><div class="market-ticker-track" id="marketTickerTrack"></div></div>
+            <time class="market-ticker-time" id="marketTickerTime">--:--</time>
+            <button id="marketTickerPause" type="button" aria-label="暂停行情滚动" aria-pressed="false">暂停</button>
+          </section>
+          <div class="top-actions">
+            <div class="global-search">
+              <label class="top-search"><span aria-hidden="true">⌕</span><input id="globalSearchInput" type="search" placeholder="搜索股票、策略或页面" aria-label="搜索股票、策略或页面" autocomplete="off" aria-autocomplete="list" aria-controls="globalSearchResults" aria-expanded="false" /></label>
+              <div class="global-search-results" id="globalSearchResults" role="listbox" aria-label="全局搜索结果" hidden></div>
+            </div>
+            <div class="service-status" id="servicePill" aria-label="正在检查 Python / Tushare 服务" title="正在检查 Python / Tushare 服务"><span class="pulse-dot"></span>连接详情</div>
+            <div class="notification-wrap">
+              <button class="icon-button notification-button" id="notificationButton" type="button" aria-label="打开通知中心" aria-expanded="false" aria-controls="notificationCenter">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"></path><path d="M10 21h4"></path></svg>
+                <span class="notification-dot" id="notificationDot" aria-hidden="true" hidden></span>
+                <span class="notification-count" id="notificationCount" hidden>0</span>
+              </button>
+              <section class="notification-center" id="notificationCenter" hidden aria-label="通知中心">
+                <div class="notification-header">
+                  <div><h2>通知中心</h2></div>
+                  <div class="notification-header-actions">
+                    <button class="notification-read-all" id="markNotificationsRead" type="button">全部已读</button>
+                    <button class="notification-refresh" id="refreshNotifications" type="button">刷新</button>
+                  </div>
+                </div>
+                <div class="notification-list" id="notificationList" aria-live="polite"></div>
+              </section>
+            </div>
+            <button class="user-chip" id="userMenuButton" type="button"><span class="avatar small">用</span><span>用户</span><span class="user-menu-chevron" aria-hidden="true"></span></button>
+          </div>
+        </header>
+
+        <div class="page-wrap">
+          <section class="page-section active" id="overview">
+            <div class="welcome-heading">
+              <div class="welcome-copy">
+                <div>
+                  <div class="overline">A-PI / PERSONAL QUANT DESK</div>
+                  <h1>Welcome, <span id="welcomeName">研究员</span></h1>
+                  <p>查看策略、风险与纸面交易状态。</p>
+                </div>
+              </div>
+              <div class="heading-actions">
+                <button class="secondary-button" id="exportButton"><span>↓</span> 导出状态详情</button>
+                <button class="primary-button" id="runButton"><span>▶</span> 运行回测</button>
+              </div>
+            </div>
+
+<div class="overview-layout">
+              <div class="overview-primary">
+            <div class="market-tape" aria-label="市场行情概览">
+              <div class="market-tape-title"><span class="market-icon">⌁</span><div><strong>市场概览</strong><small id="marketDateLabel">Tushare · 加载中</small></div></div>
+              <div class="tape-item" id="shanghaiIndexTape"><span>上证指数</span><strong id="shanghaiIndexValue">—</strong><span id="shanghaiIndexChange" class="datum-note neutral">加载中</span></div>
+              <div class="tape-item"><span>深证成指</span><strong id="shenzhenIndexValue">—</strong><span id="shenzhenIndexChange" class="datum-note neutral">暂无数据</span></div>
+              <div class="tape-item"><span>创业板指</span><strong id="chinextIndexValue">—</strong><span id="chinextIndexChange" class="datum-note neutral">暂无数据</span></div>
+              <div class="tape-item"><span>两市成交</span><strong id="marketTurnoverValue">—</strong><span class="datum-note neutral">Tushare daily</span></div>
+              <div class="tape-item"><span>涨 / 跌</span><strong id="marketBreadthValue">—</strong><span id="marketBreadthLabel" class="datum-note neutral">暂无数据</span></div>
+              <div class="tape-status" id="marketDataStatus"><span class="pulse-dot"></span><span>行情连接中</span></div>
+            </div>
+
+            <div class="metric-grid">
+              <article class="metric-card primary-metric">
+                <div class="metric-top"><span>组合净值</span><span class="metric-label green">成本调整后</span></div>
+                <div class="metric-value" id="portfolioEquity">—</div>
+                <div class="metric-foot"><span id="portfolioReturn">—</span><span id="portfolioDateRange">等待 Tushare 回测</span></div>
+              </article>
+              <article class="metric-card">
+                <div class="metric-top"><span>年化收益</span><span class="metric-label">252交易日</span></div>
+                <div class="metric-value" id="annualReturn">—</div>
+                <div class="metric-foot"><span>真实回测</span><span>Tushare 日线</span></div>
+              </article>
+              <article class="metric-card">
+                <div class="metric-top"><span>最大回撤</span><span class="metric-label">峰值至谷底</span></div>
+                <div class="metric-value negative" id="maxDrawdown">—</div>
+                <div class="metric-foot"><span id="drawdownStatus">等待数据</span><span id="recoveryDays">恢复期 —</span></div>
+              </article>
+              <article class="metric-card">
+                <div class="metric-top"><span>年化换手</span><span class="metric-label">双边口径</span></div>
+                <div class="metric-value" id="turnover">—</div>
+                <div class="metric-foot"><span>成本后</span><span>Tushare 日线</span></div>
+              </article>
+            </div>
+
+            <div class="tracker-strip" aria-label="量化服务连接状态">
+              <div class="tracker-copy"><span class="tracker-icon">⌁</span><div><strong id="trackerTitle">量化链路检查中</strong><small id="trackerConnectionLabel">正在检查 Python、Tushare、SQLite…</small></div></div>
+              <div class="tracker-badges" aria-label="数据服务连接状态">
+                <span class="tracker-badge tushare is-pending" id="trackerTushare" title="Tushare Pro · 检查中" aria-label="Tushare Pro · 检查中"><span class="tracker-badge-mark">T</span><span class="ui-decoration tracker-badge-status" aria-hidden="true"></span></span>
+                <span class="tracker-badge python is-pending" id="trackerPython" title="Python · 检查中" aria-label="Python · 检查中"><span class="tracker-badge-mark">Py</span><span class="ui-decoration tracker-badge-status" aria-hidden="true"></span></span>
+                <span class="tracker-badge sqlite is-pending" id="trackerSqlite" title="SQLite · 检查中" aria-label="SQLite · 检查中"><span class="tracker-badge-mark">DB</span><span class="ui-decoration tracker-badge-status" aria-hidden="true"></span></span>
+                <button class="tracker-more" id="trackerDetailsButton" type="button" aria-label="查看连接详情">•••</button>
+              </div>
+            </div>
+
+            <div class="dashboard-grid">
+              <article class="panel performance-panel">
+                <div class="panel-heading">
+                  <div><div class="panel-kicker">EQUITY CURVE</div><h2>净值走势</h2></div>
+                  <div class="range-tabs" role="tablist">
+                    <button class="range-tab" data-range="1M">1M</button><button class="range-tab active" data-range="6M">6M</button><button class="range-tab" data-range="1Y">1Y</button><button class="range-tab" data-range="ALL">全部</button>
+                  </div>
+                </div>
+                <div class="chart-legend"><span><span class="ui-decoration legend-line lime"></span>A-pi Tushare 回测</span><span class="chart-last">暂无数据</span></div>
+                <div class="chart-y-axis-title">净值指数</div>
+                <div class="chart-wrap chart-interactive" data-chart-role="overview"><canvas id="equityChart" tabindex="0" aria-label="组合净值走势"></canvas><div class="chart-tooltip" id="equityChartTooltip" role="status" aria-live="polite" hidden></div></div>
+                <div class="chart-x-axis-row"><div class="axis-labels" id="equityAxisLabels"><span>—</span><span>—</span><span>—</span><span>—</span><span>—</span><span>—</span></div><span class="chart-x-axis-title">交易日</span></div>
+              </article>
+              <article class="panel allocation-panel">
+                <div class="panel-heading"><div><div class="panel-kicker">EXPOSURE</div><h2>当前暴露</h2></div><button class="more-button" id="exposureDetailsButton" type="button" aria-label="查看暴露详情">•••</button></div>
+                <div class="allocation-donut" id="allocationDonut"><div class="donut-center"><strong id="exposureValue">—</strong><span>纸面股票仓位</span></div></div>
+                <div class="allocation-list" id="allocationList"><div><span class="color-key k4"></span><span>暂无纸面持仓</span><strong>—</strong></div>
+                </div>
+              </article>
+            </div>
+
+            <div class="lower-grid">
+              <article class="panel holdings-panel">
+                <div class="panel-heading"><div><div class="panel-kicker">POSITIONS</div><h2>持仓与信号</h2></div><button class="text-button" data-section-link="research">查看全部 <span>→</span></button></div>
+                <div class="table-scroll">
+                  <table><thead><tr><th>标的</th><th>行业</th><th class="num">权重</th><th id="holdingsChangeHeader">行情日期</th><th>信号</th></tr></thead>
+                    <tbody id="holdingsBody"><tr><td colspan="5">等待 Tushare 策略信号…</td></tr></tbody>
+                  </table>
+                </div>
+              </article>
+              <article class="panel audit-panel">
+                <div class="panel-heading"><div><div class="panel-kicker">RESEARCH GUARDRAILS</div><h2>研究护栏</h2></div><span class="status-chip neutral" id="guardrailStatus">等待真实回测</span></div>
+                <div class="audit-list" id="guardrailList">
+                  <div class="audit-row"><span class="audit-warn">…</span><span>正在读取 Tushare 验证结果</span><b>加载中</b></div>
+                </div>
+              </article>
+            </div>
+              </div>
+
+              <aside class="overview-sidebar" aria-label="工作台侧栏">
+                <article class="side-panel paper-side-card">
+                  <div class="side-heading"><div><div class="panel-kicker">PAPER TRADING</div><h2>纸面账户</h2></div><span class="side-live" id="homePaperStatus"><span class="ui-decoration"></span>检查中</span></div>
+                  <div class="side-account-hero"><span>当前权益</span><strong id="homePaperEquity">—</strong><span id="homePaperReturn" class="datum-note">等待数据</span></div>
+                  <div class="side-stat-grid"><div><span>可用现金</span><strong id="homePaperCash">—</strong></div><div><span>持仓数量</span><strong id="homePaperPositions">—</strong></div></div>
+                  <div class="side-progress-label"><span>资金使用率</span><strong id="homePaperExposure">—</strong></div><div class="side-progress"><span id="homePaperExposureBar" class="ui-decoration"></span></div>
+                  <button class="side-link" data-section-link="paper">查看纸面交易 <span>↗</span></button>
+                </article>
+
+                <article class="side-panel run-side-card">
+                  <div class="side-heading"><div><div class="panel-kicker">TODAY'S RUN</div><h2>今日运行</h2></div><button class="more-button" id="todayRunDetailsButton" type="button" aria-label="更多运行详情">•••</button></div>
+                  <div class="run-date" id="homeRunDate">Tushare · 等待最新交易日</div>
+                  <div class="run-list">
+                    <div class="run-row"><span class="run-dot success"></span><div><strong>行情数据</strong><small>日线与多指数快照</small></div><b id="todayMarketStatus">检查中</b></div>
+                    <div class="run-row"><span class="run-dot violet"></span><div><strong>Python 回测</strong><small>成本后样本外验证</small></div><b id="todayBacktestStatus">检查中</b></div>
+                    <div class="run-row"><span class="run-dot blue"></span><div><strong>策略日循环</strong><small>同日幂等保护</small></div><b id="todayPaperStatus">检查中</b></div>
+                  </div>
+                  <div class="run-footer"><span>数据源</span><strong>Tushare Pro</strong></div>
+                </article>
+
+                <article class="side-panel risk-side-card">
+                  <div class="side-heading"><div><div class="panel-kicker">RISK WATCH</div><h2>风险观察</h2></div><span class="status-chip neutral" id="homeRiskStatus">等待数据</span></div>
+                  <div class="risk-meter-row"><div><span>单票集中度</span><strong id="homeConcentration">—</strong></div><small id="homeConcentrationLimit">等待限额</small></div><div class="side-progress"><span id="homeConcentrationBar" class="ui-decoration"></span></div>
+                  <div class="risk-meter-row"><div><span>总杠杆</span><strong id="homeLeverage">—</strong></div><small id="homeLeverageLimit">等待限额</small></div><div class="side-progress"><span id="homeLeverageBar" class="ui-decoration"></span></div>
+                  <button class="side-link" data-section-link="risk">打开风险控制 <span>→</span></button>
+                </article>
+              </aside>
+            </div>
+          </section>
+
+          <section class="page-section" id="research">
+            <div class="page-heading compact"><div><div class="overline">RESEARCH / FACTOR LAB</div><h1>因子研究</h1><p>因子值按 Tushare 日线与公告日实时计算</p></div><button class="primary-button" id="factorButton" type="button"><span>＋</span> 新增因子</button></div>
+            <div class="research-stat-grid"><div class="research-stat"><span>实时因子</span><strong id="researchFactorCount">—</strong><span class="datum-note">Tushare 计算</span></div><div class="research-stat"><span>有效标的</span><strong id="researchValidCount">—</strong><span class="datum-note positive">真实日线</span></div><div class="research-stat"><span>平均 20 日动量</span><strong id="researchAverageMomentum">—</strong><span class="datum-note positive">当前样本</span></div><div class="research-stat"><span>最新交易日</span><strong id="researchTradeDate">—</strong><span class="datum-note">Tushare</span></div></div>
+            <div class="factor-pipeline-status" id="factorPipelineStatus">等待策略因子管线…</div>
+            <section class="panel live-ic-panel" id="liveICPanel" aria-label="上线后样本外 IC 日更监控"></section>
+            <div class="panel factor-panel"><div class="panel-heading"><div><div class="panel-kicker">FACTOR REGISTRY</div><h2>因子注册表</h2></div><div class="filter-row"><button class="filter-button active" data-factor-filter="all">全部</button><button class="filter-button" data-factor-filter="momentum">动量</button><button class="filter-button" data-factor-filter="reversal">反转</button><button class="filter-button" data-factor-filter="volatility">波动率</button><button class="filter-button" data-factor-filter="fundamental">基本面</button></div></div>
+              <div class="table-scroll"><table class="factor-table"><thead><tr><th>因子</th><th>标的</th><th class="num">当前值</th><th class="num">样本</th><th>交易日</th><th>状态</th><th>数据源</th></tr></thead><tbody id="factorTableBody"><tr><td colspan="7">等待 Tushare 因子计算…</td></tr></tbody></table></div>
+            </div>
+            <div class="panel financial-statement-panel"><div class="panel-heading"><div><div class="panel-kicker">FINANCIAL STATEMENTS / POINT-IN-TIME</div><h2>三大财务报表</h2><p class="panel-subtitle">Tushare income / balancesheet / cashflow · 按公告日可用</p></div><div class="statement-controls"><select id="statementSymbolSelect" aria-label="财务报表股票"><option value="">正在加载 Tushare 股票池…</option></select><button class="text-button" id="refreshStatementsButton" type="button" disabled>刷新</button></div></div><div class="statement-meta" id="statementMeta" role="status" aria-live="polite">等待 Tushare 财务报表…</div><div class="statement-grid" id="statementGrid"><div class="statement-empty">选择股票后加载公告日对齐的三大报表。</div></div></div>
+          </section>
+
+          <section class="page-section" id="factorMining">
+            <div class="page-heading compact"><div><h1>因子挖掘</h1></div></div>
+            <div class="panel factor-mining-panel">
+              <div class="panel-heading factor-mining-heading"><div><h2>搜索与验收</h2><p>在训练数据上搜索因子，验收通过后可用于策略</p></div><span class="status-chip neutral" id="factorMiningStatus">检查研究快照</span></div>
+              <div class="factor-mining-universe" role="note" aria-label="因子挖掘预注册研究宇宙"><strong id="factorMiningUniverseName">固定验收宇宙 · 沪深300历史成分</strong><span id="factorMiningUniverseDetails">按 Tushare index_weight 历史月度快照逐日取样，剔除上市不足60日的股票。中证500仅作报告参考，不参与筛选或验收。</span></div>
+              <div class="factor-mining-workbench">
+                <div class="factor-expression-area">
+                  <div class="factor-template-row"><select id="factorTemplateSelect"><option value="">选择一个 Alpha158 风格表达式模板</option></select><label class="secondary-button factor-template-label" for="factorTemplateSelect">基础模板</label><button class="secondary-button" id="factorTemplateLoadButton" type="button">载入模板</button></div>
+                  <label for="factorExpressionInput">表达式 DSL</label>
+                  <textarea id="factorExpressionInput" rows="3" spellcheck="false">cs_rank(-ts_delta(close, 5)) / (ts_std(returns, 20) + 0.01)</textarea>
+                  <p class="factor-expression-help">查看可用字段与算子</p>
+                  <p class="factor-expression-help" id="factorPitQuality">PIT 质量：等待封存快照；Tushare 行业历史没有可验证发布时间，行业中性化默认锁定。</p>
+                  <div class="factor-mining-config">
+                    <label>随机种子<input id="factorMiningSeed" type="number" min="0" max="2147483647" value="20260927"></label>
+                    <label>进化代数<input id="factorMiningGenerations" type="number" min="1" max="20" value="10"></label>
+                    <label>每代种群<input id="factorMiningPopulation" type="number" min="4" max="100" value="50"></label>
+                    <label>候选上限<input id="factorMiningTopN" type="number" min="1" max="20" value="10"></label>
+                    <label>评分模式<select id="factorMiningFitnessMode"><option value="icir">ICIR 复合评分</option><option value="legacy">旧版兼容评分</option></select></label>
+                    <label>种子数量<select id="factorMiningSeedCount"><option value="1">单种子</option><option value="2">2 个种子</option><option value="3">3 个种子</option><option value="4">4 个种子</option></select></label>
+                  </div>
+                  <div class="factor-mining-actions">
+                    <button class="primary-button" id="factorMineButton" type="button">运行遗传搜索</button>
+                    <button class="secondary-button" id="factorEvaluateButton" type="button">评估此表达式</button>
+                    <button class="secondary-button" id="factorTemplateCensusButton" type="button">评估全部模板</button>
+                  </div>
+                  <p class="factor-mining-feedback" id="factorMiningFeedback" role="status" aria-live="polite">等待真实 Tushare 密封快照与非密封训练数据。</p>
+                  <button class="secondary-button" id="factorMiningCancelButton" type="button" hidden>取消后台研究</button>
+                  <details class="factor-composition" data-slot="factor-composition">
+                    <summary>组合因子研究</summary>
+                    <fieldset id="factorComposeGroup" aria-describedby="factorComposeHint factorComposeStatus">
+                      <legend>选择 2–8 个已启用因子</legend>
+                      <div id="factorComposeFactors" class="factor-compose-options">正在读取可用因子…</div>
+                    </fieldset>
+                    <label class="factor-compose-weighting" for="factorComposeWeighting">组合权重<select id="factorComposeWeighting"><option value="equal">等权</option><option value="icir">训练 ICIR 权重（可为负）</option></select></label>
+                    <p id="factorComposeHint" class="factor-expression-help">每次评估消耗 1 次预算（失败不退）</p>
+                    <p id="factorComposeStatus" class="factor-expression-help" role="status" aria-live="polite" tabindex="-1">已选 0 个，请选择 2–8 个因子。</p>
+                    <button class="secondary-button" id="factorComposeButton" type="button" disabled>评估组合因子</button>
+                  </details>
+                  <details class="factor-composition" data-slot="external-deep-inbox">
+                    <summary>深度因子研究候选</summary>
+                    <p class="factor-expression-help">导入仅存入研究库，不会启用</p>
+                    <label class="factor-compose-weighting" for="factorDeepCandidate">候选模型<select id="factorDeepCandidate"><option value="">请先读取候选</option></select></label>
+                    <div class="factor-mining-actions"><button class="secondary-button" id="factorDeepRefreshButton" type="button">读取候选</button><button class="secondary-button" id="factorDeepImportButton" type="button" disabled>导入研究候选</button></div>
+                    <p id="factorDeepStatus" class="factor-expression-help" role="status" aria-live="polite" tabindex="-1">请先读取候选；导入后仍保持禁用，不代表通过正式验收。</p>
+                  </details>
+                </div>
+                <aside class="factor-mining-guardrails" aria-label="挖掘治理状态">
+                  <h3>研究边界</h3>
+                  <dl><div><dt>训练区间</dt><dd id="factorMiningTrainRange">等待快照</dd></div><div><dt>密封区间</dt><dd id="factorMiningSealedRange">等待快照</dd></div><div><dt>当前窗累计 N_tested</dt><dd id="factorMiningTestedTotal">0</dd></div><div><dt>验收权限</dt><dd id="factorMiningAcceptanceGate">尚未开放</dd></div></dl>
+                  <p>验收会汇总此 sealed 窗口全部搜索/表达式批次；每个研究周期只能打开一次。失败或中断也会消耗机会并留痕。</p>
+                </aside>
+              </div>
+              <details class="factor-evaluation-report" id="portfolioArena" data-slot="research-extension">
+                <summary>组合夏普与多 LLM 竞技场</summary>
+                <div class="factor-report-content">
+                  <p>竞技场只接收外部提案</p>
+                  <button class="secondary-button" type="button" data-research-action="refresh">读取赛季与验收配置</button>
+                  <section><h3>因子组合层评估</h3><div class="research-extension-controls"><label>因子<select id="portfolioFactorSelect" aria-label="选择组合评估因子"></select></label><button class="secondary-button" type="button" data-research-action="portfolio">读取毛 / 净组合报告</button></div><div id="portfolioFactorReport"></div></section>
+                  <details><summary>预注册成本与验收配置</summary><p>首次试验前可编辑，之后锁定</p><label>成本与验收配置 JSON<textarea id="portfolioPolicyJson" rows="10" spellcheck="false" aria-label="成本与验收配置 JSON"></textarea></label><button class="secondary-button" type="button" data-research-action="policy">保存预注册配置</button></details>
+                  <section><h3>多 LLM 公平竞技</h3><div class="research-extension-controls"><label>参赛方（逗号分隔）<input id="arenaProposers" placeholder="例如 model-A, model-B" maxlength="800"></label><label>每方预算<input id="arenaBudget" type="number" min="1" max="100" value="100"></label><label>每方提交 Top-N<input id="arenaTopN" type="number" min="1" max="10" value="5"></label><button class="secondary-button" type="button" data-research-action="arena-create">创建公平赛季</button></div><details><summary>本次创建的参赛凭据（仅显示一次）</summary><p>令牌 7 天有效，仅限本参赛方，请勿外传</p><label>参赛凭据<textarea id="arenaCredentials" rows="6" readonly spellcheck="false"></textarea></label></details><div class="research-extension-controls"><label>当前 / 历届赛季<select id="arenaSeasonSelect" aria-label="选择竞技赛季"></select></label><button class="secondary-button" type="button" data-research-action="arena-report">读取排行榜</button><button class="secondary-button" type="button" data-research-action="arena-close">封闭统一提交</button><button class="secondary-button" type="button" data-research-action="arena-accept">确认统一密封验收</button><button class="secondary-button" type="button" data-research-action="arena-archive">归档赛季</button></div><div id="arenaReport"></div></section>
+                  <p id="portfolioArenaStatus" role="status" aria-live="polite">请先读取配置；创建赛季前须准备好研究快照。</p>
+                </div>
+              </details>
+              <div class="factor-mining-output">
+                <section><h3>挖掘批次</h3><div id="factorMiningRuns" class="factor-mining-list" aria-live="polite">正在读取研究台账…</div></section>
+                <section><h3>表达式因子库</h3><div id="factorExpressionLibrary" class="factor-mining-list">等待验收结果</div></section>
+              </div>
+            </div>
+          </section>
+
+          <section class="page-section" id="backtest">
+            <div class="page-heading compact"><div><div class="overline">BACKTEST / TUSHARE DATA</div><h1>回测实验</h1></div><span class="status-chip neutral large-status" id="backtestStatus">尚未运行</span></div>
+            <div class="backtest-layout">
+<div class="panel config-panel" id="backtestConfigPanel">
+  <div class="panel-kicker">EXPERIMENT CONFIG</div>
+  <h2>实验配置</h2>
+
+  <section class="config-section" data-config-section="data" id="backtestDataSection">
+    <h3 class="config-section__title">数据与 PIT 预热</h3>
+    <div class="config-section__grid">
+      <label>数据源<span class="select-wrap"><select id="dataSourceSelect"><option value="">正在加载 Tushare 配置…</option></select></span></label>
+    </div>
+    <div id="featureStoreMount" class="feature-store-mount" aria-live="polite"></div>
+  </section>
+
+  <section class="config-section" data-config-section="strategy" id="backtestStrategySection">
+    <div class="config-section__head">
+      <h3 class="config-section__title">策略与参数</h3>
+    </div>
+    <div class="config-section__grid">
+      <label>策略<span class="select-wrap"><select id="strategySelect"><option value="" selected>正在加载真实策略…</option></select></span></label>
+    </div>
+    <details class="panel rulebook-editor" id="rulebookEditor" hidden><summary>复杂日线规则编辑器 / Daily rule editor</summary></details>
+    <div id="backtestStrategyParams" class="config-section__params config-section__grid"></div>
+    <div class="config-section__grid">
+      <label>调仓频率<span class="select-wrap"><select id="rebalanceSelect"><option value="weekly">每周</option><option value="monthly">每月</option><option value="daily">每日</option></select></span></label>
+      <label>交易成本<span class="select-wrap"><select id="costSelect"><option value="standard">标准 A 股 · 双边万 2.5 + 冲击</option><option value="low">低成本假设 · 仅用于敏感性</option></select></span></label>
+    </div>
+  </section>
+
+  <section class="config-section" data-config-section="universe" id="backtestUniverseSection">
+    <h3 class="config-section__title visually-hidden">股票池与区间</h3>
+    <div class="config-section__grid universe-align-grid">
+      <label class="universe-rebalance-slot" id="universeRebalanceSlot"></label>
+      <label class="universe-range-label"><span class="visually-hidden">回测区间</span><span class="date-fields"><input id="backtestStart" value="2024-01-02" aria-label="开始日期" title="回测开始" /><span class="ui-decoration">→</span><input id="backtestEnd" value="" placeholder="加载最新交易日" aria-label="结束日期" title="回测结束" /></span></label>
+      <div class="universe-pool-label" data-span="full" role="group" aria-label="股票池"><span class="select-wrap"><input id="symbolInput" value="" placeholder="股票代码，逗号分隔" aria-label="股票代码，使用逗号分隔" title="股票池" /></span></div>
+    </div>
+    <div class="config-section__universe-tools">
+      <button class="universe-button" id="allUniverseButton" type="button">浏览全部 A 股</button>
+      <div class="index-universe-row">
+        <select id="indexUniverseSelect" aria-label="历史指数"><option value="">正在加载 Tushare 指数…</option></select>
+        <input id="indexUniverseDate" type="date" aria-label="成分股日期" />
+        <button class="universe-button" id="indexUniverseButton" type="button">加载历史成分股</button>
+      </div>
+      <small class="universe-meta" id="indexUniverseMeta"></small>
+    </div>
+    <div class="config-note"><span>ⓘ</span><span id="universeConfigNote">正在从 Tushare 加载默认股票池…</span></div>
+  </section>
+
+  <section class="config-section config-section--run" data-config-section="run" id="backtestRunSection">
+    <h3 class="config-section__title">运行与进度</h3>
+    <div class="config-actions">
+      <div class="config-actions__primary">
+        <button class="primary-button" id="configRunButton" type="button">运行真实回测 <span>→</span></button>
+        <button class="text-button config-sensitivity-link ghost-button" id="sensitivityButton" type="button">参数敏感性扫描 ±30%</button>
+      </div>
+      <div class="backtest-progress experiment-progress" id="backtestProgress" aria-live="polite" hidden>
+        <div class="backtest-progress-head">
+          <span class="experiment-progress__kind" id="backtestProgressKind">回测任务</span>
+          <span id="backtestProgressMessage">等待任务</span>
+          <strong id="backtestProgressValue">0%</strong>
+        </div>
+        <div class="backtest-progress-track"><span id="backtestProgressBar" class="ui-decoration"></span></div>
+        <small id="backtestProgressMeta">Tushare 实时行情 · Python 异步任务</small>
+      </div>
+      <div class="sensitivity-result" id="sensitivityResult" aria-live="polite">敏感性扫描会调用 Tushare 真实行情，并记录到研究台账。</div>
+    </div>
+  </section>
+</div>
+
+<div class="panel backtest-results" id="backtestResultsPanel">
+  <div class="panel-heading">
+    <div>
+      <div class="panel-kicker">OUT-OF-SAMPLE SUMMARY</div>
+      <h2>样本外摘要</h2>
+    </div>
+    <span class="experiment-id" id="experimentId">#—</span>
+  </div>
+  <div class="result-empty" id="backtestResultEmpty" role="status">
+    <p class="result-empty__guide">尚未运行。请完成数据预热、策略与股票池配置后，点击「运行真实回测」。</p>
+  </div>
+  <div class="result-body" id="backtestResultBody" hidden>
+    <div class="result-hero">
+      <div><span>年化收益</span><strong id="backtestAnnual">—</strong></div>
+      <div><span>Sharpe</span><strong id="backtestSharpe">—</strong></div>
+      <div><span>最大回撤</span><strong class="negative" id="backtestDrawdown">—</strong></div>
+    </div>
+    <div class="chart-y-axis-title mini-y-axis-title">净值指数</div>
+    <div class="mini-chart-wrap chart-interactive" data-chart-role="backtest">
+      <canvas id="backtestChart" tabindex="0" aria-label="回测净值走势"></canvas>
+      <div class="chart-tooltip" id="backtestChartTooltip" role="status" aria-live="polite" hidden></div>
+    </div>
+    <div class="chart-x-axis-row mini-x-axis-row">
+      <div class="axis-labels mini-axis-labels" id="backtestAxisLabels"><span>—</span><span>—</span><span>—</span><span>—</span><span>—</span><span>—</span></div>
+      <span class="chart-x-axis-title">交易日</span>
+    </div>
+    <div class="result-table">
+      <div><span>训练 / 验证 / 测试</span><strong id="backtestSplit">—</strong></div>
+      <div><span>Purged embargo</span><strong id="backtestEmbargo">—</strong></div>
+      <div><span>回测运行次数</span><strong id="backtestRunCount">—</strong></div>
+      <div><span>数据版本</span><strong id="backtestDataset">—</strong></div>
+      <div><span>基准超额（沪深300 / 中证500）</span><strong class="benchmark-result" id="backtestBenchmark">—</strong></div>
+      <div><span>月度收益</span><strong class="monthly-result" id="backtestMonthly">—</strong></div>
+      <div><span>审计状态</span><strong id="backtestAudit">—</strong></div>
+    </div>
+    <details id="backtestFactorAudit" class="ledger-details backtest-trades">
+      <summary>查看实际因子、覆盖率与训练权重比较</summary>
+      <div id="backtestFactorAuditBody"></div>
+    </details>
+    <details id="backtestTrades" class="ledger-details backtest-trades">
+      <summary>查看回测成交明细</summary>
+      <p class="backtest-trades-identity"></p>
+      <div class="backtest-trades-controls">
+        <label>成交方向 <select aria-label="筛选回测成交方向"><option value="ALL">全部</option><option value="BUY">买入</option><option value="SELL">卖出</option></select></label>
+        <span role="status" aria-live="polite">等待回测结果</span>
+      </div>
+      <div class="table-scroll" tabindex="0" role="region" aria-label="回测成交明细表">
+        <table><caption class="backtest-trades-caption">所选回测的模拟成交记录</caption><thead><tr><th scope="col">成交日期</th><th scope="col">股票代码</th><th scope="col">方向</th><th scope="col">成交数量（股）</th></tr></thead><tbody></tbody></table>
+      </div>
+      <div class="backtest-trades-controls"><button type="button" class="secondary-button" data-page="previous" disabled>上一页</button><button type="button" class="secondary-button" data-page="next" disabled>下一页</button></div>
+    </details>
+  </div>
+</div>
+</div>
+
+          <div class="governance-section" id="governancePanel">
+            <div class="panel governance-panel"><div class="panel-heading"><div><div class="panel-kicker">RESEARCH GOVERNANCE</div><h2>研究治理</h2></div><span class="status-chip neutral" id="sopStage">等待纸面 SOP</span></div><div class="governance-grid"><div><span>研究预算</span><strong id="researchBudgetStatus">等待真实台账</strong></div><div><span>因子配置</span><strong id="factorLockStatus">等待纸面 SOP</strong></div><div><span>密封测试集</span><strong id="sealedTestStatus">等待真实测试</strong></div><div><span>最近台账</span><strong id="governanceLedgerMeta">等待真实台账</strong></div><div><span>3个月 / 8周检查</span><strong id="sopChecklistStatus">等待真实 SOP</strong></div><div><span>阶段 D 准入</span><strong id="sopReadinessStatus">等待真实 SOP</strong></div><div><span>Python 运维</span><strong id="opsStatus">等待服务状态</strong></div><div><span>复权因子覆盖</span><strong id="adjustmentHealthStatus">回测后检查</strong></div></div><details class="ledger-details"><summary>查看预算扣减明细</summary><p>失败不扣预算</p><div id="researchLedgerEntries" class="ledger-entries">等待真实台账</div></details></div>
+            <div class="governance-actions">
+              <div class="governance-action-buttons">
+                <button class="danger-button" id="runSealedTestButton" type="button">执行密封测试</button>
+                <button class="danger-button" id="archiveResearchButton" type="button">归档当前研究周期</button>
+              </div>
+              <small class="governance-action-note">密封测试仅一次，调参需先归档</small>
+            </div>
+            <p class="archive-status" id="archiveResearchStatus" role="status" aria-live="polite">正在读取当前策略的归档状态…</p>
+          </div>
+          </section>
+
+          <section class="page-section" id="risk">
+            <div class="page-heading compact"><div><div class="overline">RISK / CONTROL ROOM</div><h1>风险控制</h1><p>风险来自纸面账户与真实回测</p></div><div class="risk-score"><span>组合风险等级</span><strong id="riskLevel">—</strong><span class="ui-decoration">●</span></div></div>
+            <div class="risk-layout"><div class="panel risk-overview"><div class="panel-kicker">LIMIT MONITOR</div><h2>风险限额</h2><div class="limit-list" id="riskLimitList"><div class="limit-item"><div><span>风险限额</span><strong>等待 Python 风控数据</strong></div><div class="limit-track"><span style="width:0%" class="ui-decoration"></span></div><b class="limit-ok">等待数据</b></div></div></div><div class="panel alerts-panel"><div class="panel-heading"><div><div class="panel-kicker">ALERTS</div><h2>待处理提醒</h2></div><span class="status-chip neutral" id="riskAlertCount">—</span></div><div id="riskAlerts"><div class="alert-card info-alert"><span class="alert-symbol">i</span><div><strong>等待真实组合数据</strong><p>完成纸面交易或运行 Tushare 回测后，风险提醒将自动计算。</p><small>—</small></div></div></div></div></div>
+            <section class="panel optimizer-panel" aria-labelledby="optimizerTitle">
+              <div class="panel-heading"><div><div class="panel-kicker">POINT-IN-TIME / FULL COVARIANCE</div><h2 id="optimizerTitle">严格 PIT 协方差组合优化</h2><p>研究用途，不会自动调仓</p></div></div>
+              <form id="portfolioOptimizerForm" class="optimizer-form">
+                <label for="portfolioOptimizerSymbols">候选股票代码</label>
+                <textarea id="portfolioOptimizerSymbols" rows="2" maxlength="2400" placeholder="例如：000001.SZ, 600036.SH, 600000.SH" required></textarea>
+                <div class="optimizer-form-row"><label for="portfolioOptimizerDate">信号日期（可留空，使用最新可用日线）</label><input id="portfolioOptimizerDate" type="date"><button class="secondary-button" id="portfolioOptimizerRun" type="submit">运行 PIT 组合优化</button></div>
+              </form>
+              <div class="optimizer-result" id="portfolioOptimizerResult" role="status" aria-live="polite">需先配置 PIT 行业与基准权重</div>
+            </section>
+          </section>
+
+          <section class="page-section" id="paper">
+            <div class="page-heading compact"><div><div class="overline">PAPER / SIMULATION</div><h1>纸面交易</h1><details class="paper-run-details"><summary>运行与维护详情</summary><p id="paperRunExplanation">正在读取运行状态与审计记录…</p></details></div><div class="paper-status" id="paperStatus"><span class="pulse-dot"></span>纸面账户待加载</div></div>
+            <div class="paper-catchup-tools" data-slot="manual-catchup"><button type="button" class="secondary-button" id="paperManualCatchupButton" aria-describedby="paperManualCatchupHint" disabled>人工补跑</button><p id="paperManualCatchupHint">正在读取维护记录，请稍候。</p><p id="paperManualCatchupResult" role="status" aria-live="polite" hidden></p></div>
+            <div class="paper-kpis"><div class="paper-kpi"><span>纸面权益</span><strong id="paperEquity">—</strong><span id="paperReturn" class="datum-note">—</span></div><div class="paper-kpi"><span>可用现金</span><strong id="paperCash">—</strong><span class="datum-note">SQLite 持久化</span></div><div class="paper-kpi"><span>持仓数量</span><strong id="paperPositions">—</strong><span class="datum-note">真实 Tushare 行情估值</span></div><div class="paper-kpi"><span>行情质量</span><strong id="paperQuality">—</strong><span class="datum-note">由接口返回</span></div></div><div class="panel orders-panel"><div class="panel-heading"><div><div class="panel-kicker">ORDER MANAGEMENT SYSTEM</div><h2>委托生命周期</h2></div><div class="heading-actions"><button class="secondary-button" id="paperCycleButton">手动运行一次</button><button class="secondary-button" id="newOrderButton">新建纸面委托</button><button class="icon-button" id="paperRefreshButton" aria-label="刷新纸面交易">↻</button></div></div><div class="table-scroll"><table><thead><tr><th>委托 ID</th><th>标的</th><th>方向</th><th class="num">数量</th><th class="num">成交</th><th>状态</th><th>来源</th><th>时间</th></tr></thead><tbody id="paperOrdersBody"><tr><td colspan="8">正在加载纸面账户…</td></tr></tbody></table></div></div>
+          </section>
+        </div>
+        <footer class="site-footer" hidden aria-hidden="true"></footer>
+      </main>
+    </div>
+    <dialog class="utility-dialog" id="utilityDialog" aria-labelledby="utilityDialogTitle">
+      <div class="utility-dialog-head"><div><div class="panel-kicker">A-PI / LIVE DETAILS</div><h2 id="utilityDialogTitle">实时详情</h2></div><button class="secondary-button" id="utilityDialogClose" type="button" aria-label="关闭详情并返回原页面">返回原页面</button></div>
+      <div class="utility-dialog-body" id="utilityDialogBody">正在加载真实状态…</div>
+    </dialog>
+    <dialog class="utility-dialog archive-dialog" id="archiveResearchDialog" aria-labelledby="archiveResearchDialogTitle">
+      <form id="archiveResearchForm" novalidate>
+        <div class="utility-dialog-head"><h2 id="archiveResearchDialogTitle">归档研究周期</h2><button class="icon-button" id="archiveResearchClose" type="button" aria-label="取消归档">×</button></div>
+        <div class="utility-dialog-body">
+          <p class="archive-description">仅归档下方策略的当前研究记录与密封测试；历史审计记录会保留。</p>
+          <p class="archive-summary" id="archiveResearchSummary" role="status">正在读取当前策略的研究记录…</p>
+          <label class="archive-reason-label" for="archiveResearchReason">归档原因</label>
+          <textarea id="archiveResearchReason" maxlength="500" rows="3" required placeholder="说明为什么结束本轮研究"></textarea>
+          <p class="archive-error" id="archiveResearchError" role="alert" hidden></p>
+          <div class="utility-dialog-actions"><button class="secondary-button" id="archiveResearchCancel" type="button">取消</button><button class="primary-button" id="archiveResearchConfirm" type="submit" disabled>确认归档</button></div>
+        </div>
+      </form>
+    </dialog>
+    <div class="toast" id="toast" role="status"><span class="toast-icon">✓</span><span id="toastText">实验已加入队列</span></div>
+    <script type="module" src="app.js?v=20261001-contracts-1"></script>
+  </body>
+</html>

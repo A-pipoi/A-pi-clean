@@ -1,0 +1,639 @@
+/* Approved light/dark reference world; presentation only.
+ * Glass lives in chrome and summaries. Analysis and dense data remain opaque.
+ * Concave navigation shoulders are tangent quarter circles, not raster masks.
+ */
+html { background: var(--bg); scrollbar-color: var(--muted) var(--panel2); }
+body { background: var(--bg); color: var(--text); }
+button, input, select, textarea { font-family: var(--font-ui); }
+input, textarea { caret-color: var(--purple); }
+:is(button,a,input,select,textarea,summary):focus-visible {
+  outline: 2px solid var(--purple);
+  outline-offset: 3px;
+}
+/* Preserve original brand pixels, aspect, purpose and positions in both themes. */
+:is(img[src*="a-pi-mark"],img.brand-icon,img.desktop-splash-mascot) {
+  filter: none !important;
+  opacity: 1 !important;
+  object-fit: contain;
+  mix-blend-mode: normal;
+  animation: none !important;
+  transform: none !important;
+}
+
+/* Layer 1 — a single ink-colored navigation silhouette. */
+.app-shell .sidebar {
+  width: 88px;
+  flex: 0 0 88px;
+  background: var(--sidebar-bg);
+  color: var(--sidebar-text);
+  border: 0;
+  border-radius: var(--radius);
+  padding: var(--space-5) var(--space-2);
+  margin: var(--space-3) 0 var(--space-3) var(--space-3);
+  min-height: calc(100vh - var(--space-6));
+  box-shadow: none;
+  isolation: isolate;
+}
+.app-shell .sidebar :is(.brand-name,.health-score strong,.nav-item,.mini-link) {
+  color: var(--sidebar-text);
+}
+.app-shell .sidebar .brand-lockup {
+  justify-content: center;
+  padding-block-end: var(--space-5);
+}
+.app-shell .sidebar .brand-lockup > div { display: none; }
+.app-shell .sidebar :is(.brand-subtitle,.health-meta,.health-score span,.eyebrow) {
+  color: var(--sidebar-muted);
+}
+.app-shell .sidebar .workspace-selector { display: none !important; }
+.app-shell .sidebar .data-health { display: none; }
+.app-shell .sidebar .workspace-switcher {
+  background: var(--sidebar-hover);
+  color: var(--sidebar-text);
+  border-color: var(--sidebar-hover);
+  border-radius: var(--control-radius);
+  min-height: 44px;
+}
+.app-shell .sidebar .data-health {
+  background: transparent;
+  border-color: var(--sidebar-hover);
+}
+.app-shell .sidebar .mini-link { background: transparent; }
+.app-shell .sidebar .mini-link span { border-color: var(--sidebar-muted); }
+.app-shell .sidebar .health-bar { background: var(--sidebar-hover); }
+.app-shell .nav-list {
+  gap: var(--space-2);
+  margin-block-start: var(--space-4);
+  padding: 0;
+  overflow: visible;
+}
+.app-shell .nav-item {
+  width: 56px !important;
+  justify-self: center;
+  box-sizing: border-box;
+  justify-content: center;
+  border-radius: var(--control-radius);
+  padding: var(--space-3);
+  min-height: 52px;
+  font-size: var(--text-base);
+  color: var(--sidebar-text);
+  background: transparent;
+  box-shadow: none;
+  isolation: isolate;
+  overflow: visible;
+  border: 0;
+}
+.app-shell .nav-item .nav-label { display: none; }
+.app-shell .nav-icon {
+  width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
+  display: grid;
+  place-items: center;
+  font-size: 20px;
+  line-height: 1;
+}
+.app-shell .nav-icon svg { width: 20px; height: 20px; }
+.app-shell .nav-item:not(.active):hover { background: var(--sidebar-hover); }
+.app-shell .sidebar .nav-item.active {
+  color: var(--nav-slot-text);
+  background: var(--nav-slot);
+  box-shadow: none;
+}
+.app-shell .nav-item.active::before,
+.app-shell .nav-item.active::after { display: none; }
+.app-shell .nav-item:focus-visible { outline-offset: -5px; }
+.app-shell .nav-item .nav-badge {
+  position: absolute;
+  z-index: 2;
+  inset-block-start: 3px;
+  inset-inline-end: 5px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  color: var(--warning-text);
+  background: transparent;
+  font-size: 11px;
+  font-weight: var(--weight-bold);
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.app-shell .sidebar-footer {
+  width: 100%;
+  min-height: 44px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: nowrap;
+}
+.app-shell .sidebar-footer .mini-link {
+  width: 36px;
+  justify-content: center;
+  min-height: 36px;
+  padding: 0;
+  gap: 0;
+  line-height: 1;
+  font-size: 0;
+  white-space: nowrap;
+}
+.app-shell .sidebar-footer .mini-link > span {
+  width: 20px;
+  height: 20px;
+  flex: none;
+  box-sizing: border-box;
+}
+.app-shell .sidebar-footer .mini-link > span > .ui-icon {
+  display: block;
+  width: 14px;
+  height: 14px;
+}
+
+/* Glass chrome. No content blur or card-level filter. */
+.app-shell .main-content { min-width: 0; background: var(--bg); }
+.app-shell .topbar {
+  position: relative;
+  z-index: 200;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-edge);
+  border-radius: var(--radius);
+  margin: var(--space-3) var(--space-5) 0;
+  padding: var(--space-3) var(--space-5);
+  box-shadow: var(--glass-shadow);
+  align-items: center;
+  gap: var(--space-3) var(--space-5);
+}
+.app-shell .topbar .top-actions { gap: var(--space-3); }
+.app-shell .topbar :is(.service-status,.notification-button,.user-chip,.theme-control select) {
+  box-sizing: border-box;
+  height: 44px;
+  min-height: 44px;
+}
+.app-shell .topbar .service-status {
+  display: flex;
+  flex: 0 0 auto;
+  width: max-content;
+  max-width: 100%;
+  min-width: 0;
+  padding-inline: var(--space-4);
+  align-items: center;
+  white-space: nowrap;
+}
+.app-shell .topbar .notification-button { width: 44px; }
+.app-shell .topbar .user-chip {
+  display: flex;
+  align-items: center;
+  padding-inline: var(--space-3);
+}
+.utility-dialog-body .manual-guide-link {
+  margin-block: var(--space-5) var(--space-1);
+  text-align: center;
+}
+.help-manual {
+  width: min(72ch, 100%);
+  box-sizing: border-box;
+  margin-inline: auto;
+  padding: var(--space-8) var(--space-5);
+  color: var(--text);
+  line-height: var(--leading-normal);
+}
+.help-manual h1 { margin-block: var(--space-5); }
+.help-manual h2 { margin-block: var(--space-8) var(--space-3); }
+.help-manual li { margin-block: var(--space-2); }
+.help-manual section { scroll-margin-block-start: var(--space-5); }
+.app-shell .topbar :is(.top-search,.theme-control select,.service-status,.user-chip) {
+  border-radius: var(--control-radius);
+  color: var(--text);
+  background: var(--panel2);
+  border-color: var(--line);
+}
+.app-shell .topbar .top-search { display: flex; min-height: 44px; width: 100%; }
+.app-shell .topbar input { color: var(--text); background: transparent; }
+.app-shell :is(.icon-button,#marketTickerPause) {
+  min-height: 44px;
+  min-width: 44px;
+  border-radius: var(--control-radius);
+  color: var(--text);
+  border: 1px solid var(--line);
+  background: var(--panel2);
+}
+.app-shell .notice-bar .notice-icon {
+  width: 20px;
+  height: 20px;
+  flex: none;
+  border: 0;
+}
+.app-shell .notice-bar .notice-icon > .ui-icon {
+  display: block;
+  width: 20px;
+  height: 20px;
+}
+.app-shell .theme-control > span { font-size: var(--text-sm); color: var(--muted); }
+.app-shell .page-wrap { max-width: 1800px; padding: var(--space-8) var(--space-5); }
+.app-shell :is(.range-tabs,.period-tabs,.filter-row) {
+  border-radius: var(--control-radius);
+  background: var(--panel2);
+}
+.app-shell :is(.range-tab,.filter-button,.period-tabs button) {
+  border-radius: var(--control-radius);
+  min-height: 36px;
+}
+.app-shell :is(.range-tab.active,.filter-button.active,.period-tabs button.active) {
+  background: var(--purple-soft);
+  color: var(--purple);
+  box-shadow: none;
+}
+
+/* Layer 2 — one dominant value card; quiet supporting measures. */
+.app-shell .metric-grid {
+  grid-template-columns: minmax(0,1.85fr) repeat(3,minmax(0,1fr));
+  gap: var(--space-4);
+}
+.app-shell .metric-card { border-radius: var(--radius); min-height: 180px; }
+.app-shell .metric-card.primary-metric {
+  background: var(--summary-gradient);
+  color: var(--summary-text);
+  border-color: var(--summary-edge);
+  box-shadow: var(--summary-shadow);
+}
+/* Explicit specificity defeats the old dark nth-child metric declarations. */
+html[data-theme="dark"] .app-shell .metric-card.primary-metric {
+  background: var(--summary-gradient);
+  border-color: var(--summary-edge);
+  color: var(--summary-text);
+  box-shadow: var(--summary-shadow);
+}
+html[data-theme="dark"] .app-shell .sidebar { background: var(--sidebar-bg); }
+html[data-theme="dark"] .app-shell .topbar { background: var(--glass-bg); box-shadow: var(--glass-shadow); }
+html[data-theme="dark"] .app-shell .nav-item.active { background: var(--nav-slot); color: var(--nav-slot-text); }
+html[data-theme] .app-shell .metric-card.primary-metric :is(.metric-top,.metric-value,.metric-top span) {
+  color: var(--summary-text);
+}
+html[data-theme] .app-shell .metric-card.primary-metric :is(.metric-label,.metric-foot,.metric-label span) { color: var(--summary-muted); }
+/* The legacy green decoration used !important; it is not a return/status. */
+html[data-theme] .app-shell .metric-card.primary-metric .metric-label.green { color: var(--summary-muted) !important; }
+.app-shell .primary-metric .metric-icon-chip {
+  color: var(--summary-text);
+  background: var(--summary-icon);
+}
+.app-shell .primary-metric .metric-value {
+  font-size: clamp(var(--text-lg),2vw,2.25rem);
+  font-weight: var(--weight-bold);
+  font-variant-numeric: tabular-nums;
+}
+.app-shell .primary-metric :is(.rise,.positive) { color: var(--up) !important; }
+.app-shell .primary-metric :is(.fall,.negative) { color: var(--down) !important; }
+.app-shell .primary-metric .metric-foot { flex-direction: column; align-items: flex-start; }
+.app-shell .metric-card:not(.primary-metric) { background: var(--panel); box-shadow: none; border: 1px solid var(--line); }
+.app-shell .paper-kpi:first-child { background: var(--account-gradient); border-color: var(--line); }
+
+/* Layer 3 — stable analytical planes and independent auxiliary rail. */
+.app-shell :is(.panel,.config-panel,.result-panel,.research-stat,.paper-kpi,.statement-card,
+  .research-governance,.governance-card,.experiment-comparison,.optimizer-panel) {
+  color: var(--text);
+  background: var(--module-gradient);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--card-shadow);
+}
+/* Each analytical module gets its own quiet color family; content stays neutral and legible. */
+.app-shell .performance-panel,
+.app-shell .factor-mining-panel,
+.app-shell .optimizer-panel { --module-gradient: var(--module-gradient-lilac); }
+.app-shell .allocation-panel,
+.app-shell .factor-panel,
+.app-shell .governance-panel,
+.app-shell .risk-overview { --module-gradient: var(--module-gradient-mint); }
+.app-shell #liveICPanel + .factor-panel { margin-block-start: var(--space-4); }
+.app-shell #backtest .backtest-layout {
+  column-gap: var(--space-4);
+  margin-block-end: var(--space-4);
+}
+.app-shell .holdings-panel,
+.app-shell .financial-statement-panel,
+.app-shell .backtest-results,
+.app-shell .orders-panel,
+.app-shell .live-ic-panel { --module-gradient: var(--module-gradient-blue); }
+.app-shell .audit-panel,
+.app-shell .alerts-panel,
+.app-shell .rulebook-editor { --module-gradient: var(--module-gradient-rose); }
+.app-shell .metric-card:nth-child(2),
+.app-shell .metric-card:nth-child(3),
+.app-shell .metric-card:nth-child(4) { background: var(--panel); }
+.app-shell .research-stat:nth-child(4n + 1),
+.app-shell .paper-kpi:nth-child(4n + 1):not(:first-child) { background: var(--module-gradient-mint); }
+.app-shell .research-stat:nth-child(4n + 2),
+.app-shell .paper-kpi:nth-child(4n + 2) { background: var(--module-gradient-blue); }
+.app-shell .research-stat:nth-child(4n + 3),
+.app-shell .paper-kpi:nth-child(4n + 3) { background: var(--module-gradient-lilac); }
+.app-shell .research-stat:nth-child(4n),
+.app-shell .paper-kpi:nth-child(4n) { background: var(--module-gradient-rose); }
+.app-shell .overview-sidebar .run-side-card { background: var(--module-gradient-blue); }
+.app-shell .overview-sidebar .risk-side-card { background: var(--module-gradient-lilac); }
+.app-shell :is(.dashboard-grid,.lower-grid) { gap: var(--space-5); }
+.app-shell .overview-sidebar {
+  background: var(--rail-bg);
+  padding: var(--space-3);
+  border-radius: calc(var(--radius) + var(--space-2));
+  gap: var(--space-4);
+  min-width: 0;
+}
+.app-shell .overview-sidebar .side-panel {
+  color: var(--text);
+  background: var(--module-gradient-cool);
+  border: 1px solid var(--glass-edge);
+  border-radius: var(--radius);
+  box-shadow: var(--glass-shadow);
+}
+.app-shell .overview-sidebar .paper-side-card {
+  background: var(--account-gradient);
+  color: var(--account-text);
+  box-shadow: var(--summary-shadow);
+}
+html[data-theme="dark"] .app-shell .overview-sidebar .side-panel {
+  background: var(--module-gradient-cool);
+  border-color: var(--glass-edge);
+  box-shadow: var(--glass-shadow);
+}
+html[data-theme="dark"] .app-shell .overview-sidebar .paper-side-card { background: var(--account-gradient); }
+.app-shell .paper-side-card :is(.side-heading h2,strong) { color: var(--account-text); }
+.app-shell .paper-side-card :is(small,label,.paper-account-summary > span) { color: var(--account-muted); }
+.app-shell :is(.chart-wrap,.mini-chart-wrap,.financial-chart-plot) { background: var(--panel); }
+.app-shell .market-tape { background: var(--panel); border-radius: var(--radius); }
+.app-shell .legend-line.lime { background: var(--chart-primary); border-color: var(--chart-primary); }
+.app-shell .pie-hover-detail {
+  padding: var(--space-3);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--panel2);
+  margin-block-end: var(--space-3);
+}
+.app-shell .allocation-panel { position: relative; container-type: inline-size; }
+.app-shell .allocation-panel .pie-hover-detail[data-floating="true"] {
+  display: grid;
+  min-height: 112px;
+  margin: 0;
+  padding: var(--space-3);
+  box-shadow: var(--card-shadow);
+}
+.app-shell .allocation-panel[data-pie-active="true"] > .pie-hover-detail[data-floating="true"] {
+  display: grid;
+}
+/* Hover must never change the ring's size or hit area (ResizeObserver loop). */
+
+/* Layer 4 — opaque tables, forms and complex research content. */
+:is(input,select,textarea) { color: var(--text); }
+.app-shell :is(.config-group,.factor-mining-config,.factor-expression-area,.optimizer-form) {
+  background: transparent;
+  min-width: 0;
+}
+:is(.app-shell,.account-security,.auth-card) :is(input,select,textarea) {
+  background-color: var(--panel2);
+  color: var(--text);
+  border-color: var(--line);
+  border-radius: var(--radius-sm);
+}
+.app-shell :is(.table-wrap,.table-scroll,.holdings-table-wrap,.paper-orders-table-wrap) {
+  width: 100%;
+  min-width: 0;
+  overflow: auto;
+  border-radius: var(--radius-sm);
+  background: var(--panel);
+}
+.app-shell :is(.table-wrap,.table-scroll,.holdings-table-wrap,.paper-orders-table-wrap) > table { margin-top: 0; }
+.app-shell table { background: var(--panel); color: var(--text); font-variant-numeric: tabular-nums; }
+.app-shell table thead th { text-align: center; }
+.app-shell :is(table th,table td) { border-color: var(--line); }
+html[data-theme] .app-shell .result-table strong { color: var(--text); }
+.app-shell .index-universe-row { display: grid; grid-template-columns: minmax(0,1fr); }
+.app-shell .index-universe-row > :is(input,select) { min-width: 0; width: 100%; }
+.app-shell .index-universe-row > button { width: auto; justify-self: start; }
+.app-shell :is(table th,.ledger-row,.utility-row,.notification-item) { background: var(--panel2); }
+.app-shell :is(.empty-state,.factor-mining-empty,.notification-empty,.backtest-progress) {
+  background: var(--panel2);
+  color: var(--muted);
+  border-color: var(--line);
+}
+.app-shell .notification-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-2);
+}
+.app-shell .notification-item {
+  flex: none;
+  border: 1px solid var(--line);
+}
+
+/* Shared overlays and auth/splash surfaces, not only the overview route. */
+:is(.utility-dialog,.account-security,.archive-dialog,.factor-registration-dialog,
+  .notification-center,.workspace-menu,.global-search-results,.user-menu,.stock-suggestions) {
+  background: var(--glass-bg);
+  color: var(--text);
+  border: 1px solid var(--glass-edge);
+  border-radius: var(--radius);
+  box-shadow: var(--glass-shadow);
+}
+dialog::backdrop { background: var(--overlay-scrim); }
+.auth-screen, html[data-theme="dark"] .auth-screen { background: var(--bg); }
+.auth-grid-glow { display: none; }
+.auth-screen::before,.auth-screen::after { display: none; }
+.auth-card, html[data-theme="dark"] .auth-card {
+  background: var(--glass-bg);
+  color: var(--text);
+  border: 1px solid var(--glass-edge);
+  border-radius: var(--radius);
+  box-shadow: var(--glass-shadow);
+}
+html.desktop-startup .desktop-splash, html[data-theme="dark"] .desktop-splash {
+  background: var(--bg);
+  color: var(--text);
+}
+.desktop-splash-card, html[data-theme="dark"] .desktop-splash-card {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+.desktop-splash-card > p { color: var(--muted); }
+@supports (backdrop-filter: blur(1px)) {
+  :is(.topbar,.notification-center,.workspace-menu,.global-search-results,.user-menu,
+    .utility-dialog,.account-security,.auth-card) {
+    backdrop-filter: blur(var(--glass-blur));
+  }
+}
+:is(.primary-button,.secondary-button,.text-button,.security-actions button) { border-radius: var(--control-radius); }
+:is(.primary-button,.secondary-button,.icon-button,.filter-button,.range-tab) {
+  transition: background-color var(--motion-feedback) var(--ease-feedback),
+    border-color var(--motion-feedback) var(--ease-feedback),
+    transform var(--motion-feedback) var(--ease-feedback);
+}
+.app-shell :is(.primary-button,.secondary-button) { min-height: 44px; border-radius: var(--control-radius); }
+.app-shell .secondary-button { background: var(--panel2); color: var(--text); }
+html[data-theme] .app-shell .text-button { color: var(--purple); }
+html[data-theme="dark"] .app-shell .limit-item strong { color: var(--text); }
+html[data-theme="dark"] .app-shell .limit-ok { color: var(--status-ok); }
+
+/* Dark-mode operational notices must stay inside the same analytical material system. */
+html[data-theme] .app-shell .factor-pipeline-status {
+  background: var(--panel2);
+  border-color: var(--line);
+  color: var(--muted);
+}
+html[data-theme] .app-shell .alert-card.warning-alert {
+  background: var(--warning-surface);
+  border-color: var(--warning-border);
+}
+html[data-theme] .app-shell .alert-card.info-alert {
+  background: var(--info-surface);
+  border-color: var(--info-border);
+}
+html[data-theme] .app-shell .alert-card.warning-alert .alert-symbol {
+  color: var(--warning-text);
+}
+html[data-theme="dark"] .app-shell .alert-card :is(strong,p,small) {
+  color: var(--text);
+}
+html[data-theme="dark"] .app-shell .alert-card :is(p,small) {
+  color: var(--muted) !important;
+}
+html[data-theme="dark"] .app-shell .alert-card button {
+  color: var(--purple);
+}
+:is(.primary-button,.secondary-button):disabled { opacity: .55; cursor: not-allowed; box-shadow: none; }
+
+@media (min-width: 1440px) {
+  .app-shell .dashboard-grid { grid-template-columns: minmax(0,2fr) minmax(220px,1fr); }
+}
+@media (max-width: 1390px) and (min-width: 721px) {
+  .app-shell .metric-grid { grid-template-columns: repeat(3,minmax(0,1fr)); }
+  .app-shell .primary-metric { grid-column: 1 / -1; min-height: 136px; }
+  .app-shell .primary-metric .metric-foot { flex-direction: row; flex-wrap: wrap; }
+}
+@media (max-width: 1120px) {
+  .app-shell .overview-sidebar { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); }
+}
+@media (max-width: 860px) {
+  .app-shell .overview-sidebar { grid-template-columns: minmax(0,1fr); }
+}
+@media (max-width: 720px) {
+  .app-shell .sidebar {
+    width: auto;
+    margin: var(--space-2);
+    padding: var(--space-3);
+    min-height: 0;
+    border-radius: var(--radius);
+  }
+  .app-shell .nav-list { overflow-x: auto; overflow-y: hidden; gap: var(--space-2); margin: 0; padding: 0; }
+  .app-shell .nav-item { width: 48px !important; min-width: 48px; border-radius: var(--control-radius); min-height: 44px; padding: var(--space-2); }
+  .app-shell .sidebar .brand-lockup { justify-content: flex-start; }
+  .app-shell .sidebar .brand-lockup > div { display: block; }
+  .app-shell .sidebar-footer { justify-content: center; }
+  .app-shell .topbar { margin: var(--space-2); padding: var(--space-3); }
+  .app-shell .topbar .global-search { display: block; width: 100%; min-width: 0; flex-basis: 100%; }
+  .app-shell .topbar .top-actions { flex-wrap: wrap; width: 100%; }
+  .app-shell .topbar .service-status {
+    display: flex;
+    flex: 0 0 auto;
+    width: max-content;
+    max-width: 100%;
+    min-width: 0;
+  }
+  .app-shell .page-wrap { padding: var(--space-5) var(--space-3); }
+  .app-shell .metric-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+  .app-shell .primary-metric { grid-column: 1 / -1; }
+  .app-shell .metric-card { min-height: 0; }
+  .app-shell .overview-sidebar { grid-template-columns: minmax(0,1fr); }
+  .theme-control { white-space: normal; }
+}
+@media (max-width: 440px) {
+  .app-shell .metric-grid { grid-template-columns: minmax(0,1fr); }
+}
+@media (prefers-reduced-motion: reduce) {
+  :is(.primary-button,.secondary-button,.icon-button,.filter-button,.range-tab) { transition: none !important; }
+}
+@media (prefers-reduced-transparency: reduce) {
+  :is(.topbar,.notification-center,.workspace-menu,.global-search-results,.user-menu,
+    .utility-dialog,.account-security,.auth-card,.desktop-splash-card) {
+    background: var(--panel) !important;
+    backdrop-filter: none;
+  }
+}
+
+/* Keep the two preference rows on the auth card in the same label/control columns. */
+.auth-card-footer :is(.language-control,.theme-control) {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 160px);
+  align-items: center;
+  flex: 0 0 100%;
+  width: 100%;
+  gap: var(--space-3);
+  margin: 0;
+  white-space: normal;
+}
+.auth-card-footer .language-control { order: -2; }
+.auth-card-footer .theme-control { order: -1; justify-content: initial; }
+.auth-card-footer :is(.language-control select,.theme-control select) {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  height: 40px;
+  min-height: 40px;
+  padding: 0 var(--space-3);
+  border: 1px solid var(--line);
+  border-radius: var(--control-radius);
+  color: var(--text);
+  background: var(--panel2);
+  font: var(--weight-bold) var(--type-meta) var(--font-ui);
+}
+.auth-card-footer > span { order: 0; width: 100%; }
+
+/* Research extensions reuse the established Operate tokens and table shell. */
+#portfolioArena { margin-block: var(--space-6); }
+#portfolioArena .factor-report-content { display: grid; gap: var(--space-6); }
+.research-extension-controls { display: flex; flex-wrap: wrap; align-items: end; gap: var(--space-3); margin-block: var(--space-4); }
+.research-extension-controls label { display: grid; gap: var(--space-2); min-width: 0; flex: 1 1 160px; }
+#portfolioArena :is(input,select,textarea) { width: 100%; box-sizing: border-box; min-height: 44px; padding: var(--space-3); border: 1px solid var(--line); border-radius: var(--control-radius); background: var(--panel2); color: var(--text); font: inherit; }
+#portfolioArena textarea { resize: vertical; }
+#portfolioArena button { min-height: 44px; }
+#portfolioArena :is(button,input,select,textarea):focus-visible { outline: 2px solid var(--purple); outline-offset: 3px; }
+.portfolio-nav-chart { display: block; width: 100%; max-height: 200px; color: var(--purple); }
+.portfolio-gross-line { stroke: var(--purple); }
+.portfolio-net-line { stroke: var(--text); }
+.portfolio-probabilities { display: grid; gap: var(--space-3); }
+.portfolio-probabilities > div { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--space-2); }
+.portfolio-probabilities dd { margin: 0; font-variant-numeric: tabular-nums; }
+.portfolio-report .factor-report-table-wrap { max-width: 100%; overflow-x: auto; }
+#portfolioArena :is(.factor-report-table, textarea) { overflow-wrap: anywhere; }
+.portfolio-ic-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--space-6);
+  align-items: start;
+}
+.portfolio-ic-layout > * { min-width: 0; }
+@media (max-width: 768px) {
+  .portfolio-ic-layout { grid-template-columns: minmax(0, 1fr); }
+}
+.backtest-default-display {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-block: 16px;
+  overflow-wrap: anywhere;
+}
+.backtest-default-display p {
+  flex: 1 1 100%;
+  margin: 0;
+}
+.backtest-default-display button {
+  min-height: 44px;
+}
+.backtest-trades { margin-block-start: var(--space-6); min-width: 0; }
+.backtest-trades-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-block: 16px; }
+.backtest-trades-identity { overflow-wrap: anywhere; }
+.backtest-trades table { width: 100%; font-variant-numeric: tabular-nums; }
+.backtest-trades th, .backtest-trades td { text-align: center; white-space: nowrap; }
+.backtest-trades-caption { text-align: start; padding-block: 8px; }
